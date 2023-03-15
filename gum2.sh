@@ -34,7 +34,7 @@ Menu() {
     echo -e "[${cyan}2${cls}] 사용자 자동 삭제"
     echo -e "[${red}0${cls}] 종료"
 	echo
-	echo -n "$title ${tear}메뉴를 선택해주세요:${cls} "
+	echo - "$title ${tear}메뉴를 선택해주세요:${cls} "
     read key
     if [ ${key} -eq 1 ] ; then
         Utg
