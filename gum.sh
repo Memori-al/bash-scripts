@@ -2,11 +2,11 @@
 
 # Made by luikie
 # Check arr txt file
-if [[ ! -f "./sm-user.txt" ]]: then
+if [[ ! -f "./sm-user.txt" ]]; then
 	wget "https://raw.githubusercontent.com/Memori-al/bash-scripts/main/sm-user.txt"
 	
 fi
-if [[ ! -f "./sm-deluser.txt" ]]: then
+if [[ ! -f "./sm-deluser.txt" ]]; then
 	echo > ./sm-deluser.txt
 fi
 
