@@ -2,13 +2,11 @@
 # Made by luikie
 
 # Check arr txt file
-if [[ ! -f "./sm-user.txt" ]]
-then
+if [[ ! -f "./sm-user.txt" ]]: then
 	wget "https://raw.githubusercontent.com/Memori-al/bash-scripts/main/sm-user.txt"
 	
 fi
-if [[ ! -f "./sm-deluser.txt" ]]
-then
+if [[ ! -f "./sm-deluser.txt" ]]: then
 	echo > ./sm-deluser.txt
 fi
 
@@ -20,14 +18,14 @@ duid_arr=(`cat ./sm-deluser.txt`)
 # Main Function
 main() {
 	clear
-	echo U s e r G r o u p M a n a g e r
+	echo "U s e r G r o u p M a n a g e r"
 	echo
-    echo "[1] Useradd to Group"
-    echo "[2] Delete users from group"
-    echo "[0] Exit"
+	echo "[1] Useradd to Group"
+	echo "[2] Delete users from group"
+	echo "[0] Exit"
 	echo
 	echo -n "$title Select Menu: "
-    read key
+	read key
 
     if [ ${key} -eq 1 ] ; then
         utg
