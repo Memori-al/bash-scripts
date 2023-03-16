@@ -34,7 +34,7 @@ Menu() {
     echo -e "[${cyan}2${cls}] Delete users from group"
     echo -e "[${red}0${cls}] Exit"
 	echo
-	echo -e -n "$title ${tear}메뉴를 선택해주세요:${cls} "
+	echo -e -n "$title ${tear}Select Menu:${cls} "
     read key
     if [ ${key} -eq 1 ] ; then
         Utg
