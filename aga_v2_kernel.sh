@@ -156,7 +156,7 @@ Ua5() {
 				usermod -a -G "$group" "$user-$i" # 그룹에 사용자 추가
 				chgrp "$group" "/home2/$user-$i" # 사용자 디렉토리 권한 그룹으로 변경
 			else
-				useradd -m -d /home/$user-$i -s /bin/bash $user-$i # 사용자와 사용자의 home 디렉토리 생성
+				useradd -m -d /home2/$user-$i -s /bin/bash $user-$i # 사용자와 사용자의 home 디렉토리 생성
 				echo "$user-$i:wjsansrk"|chpasswd # 사용자의 비밀번호 변경
 				usermod -a -G "$group" "$user-$i" # 그룹에 사용자 추가
 				chgrp "$group" "/home2/$user-$i" # 사용자 디렉토리 권한 그룹으로 변경
