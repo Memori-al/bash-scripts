@@ -1,0 +1,6 @@
+glibc.i686
+libstdc++.i686
+epel-release
+wine
+xorg-x11-server-Xvfb
+xrdp
