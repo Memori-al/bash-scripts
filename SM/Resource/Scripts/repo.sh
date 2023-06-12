@@ -12,8 +12,7 @@ elif [[ ! -d "/sm-shell/Resource/Rpm" ]]; then
     mkdir /sm-shell/Resource/Rpm
 fi
 
-createrepo /sm-shell/Resource # 레포 생성
-rm -rf /etc/yum.repo.d/*
+mv /etc/yum.repo.d/* /sm-shell # 이전 레포 이동
 cp /sm-shell/Resource/Data/local.repo /etc/yum.repos.d # 레포 복붙
 yum clean all # 레포 리스트 초기화
 yum repolist # 레포리스트 구성

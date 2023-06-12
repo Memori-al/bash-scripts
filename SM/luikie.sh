@@ -64,7 +64,7 @@ _Check() {
         _Handler mariadb "$(date '+%H:%M:%S')" service
         systemctl start mariadb
     fi
-    if [[ $(rpm -qa | grep php) == "" ]]; then
+    if [[ ! $(rpm -qa | grep php) ]]; then
        _Handler php "$(date '+%H:%M:%S')" install
     fi
 } 
