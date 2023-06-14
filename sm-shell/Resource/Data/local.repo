@@ -1,0 +1,5 @@
+[local-repo]
+name=local repo
+baseurl=file:///sm-shell/Resource
+enabled=1
+gpgcheck=0

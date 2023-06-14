@@ -1,0 +1,11 @@
+HOME =
+	(DESCRIPTION =
+	  (ADDRESS = (PROTOCOL = TCP)(HOST = linuxDB.db)(PORT = 1521))
+	  (CONNECT_DATA =
+	     (SERVER = DEDICATED)
+	     (SERVICE_NAME = linuxDB.db)
+	  )
+	)
+
+LISTENER_linuxDB =
+	(ADDRESS = (PROTOCOL = TCP)(HOST = linuxDB.db)(PORT = 1521))
