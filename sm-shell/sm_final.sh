@@ -40,7 +40,7 @@ _Init() {
         if [[ $2 == "install" ]]; then
             source /sm-shell/Resource/Scripts/quota.sh install 2>> /sm-shell/Quota_"$(date +"%m%d")".log
         elif [[ $2 == "set" ]]; then
-            source /sm-shell/Resource/Scripts/quota.sh set 2>> /sm-shell/Quota_"$(date +"%m%d")".log
+            source /sm-shell/Resource/Scripts/quota.sh set $3 2>> /sm-shell/Quota_"$(date +"%m%d")".log
         else
             source /sm-shell/Resource/Scripts/messages.sh quota
             exit 1
