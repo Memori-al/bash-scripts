@@ -56,21 +56,25 @@ _QSettings() {
     if [[ ! $(grep "$2 /quotahome ext4 defaults,usrjquota=aquota.user,grpjquota=aquota.group,jqfmt=vfsv0 1 2" "/etc/fstab") ]]; then
         echo "$2 /quotahome ext4 defaults,usrjquota=aquota.user,grpjquota=aquota.group,jqfmt=vfsv0 1 2">> /etc/fstab
     fi
-    mount -o remount $2
-    quotaoff -avug
-    quotacheck -augmn
-    rm -rf aquota.*
-    quotacheck -augmn
+    mount -o remount $2 > $log_path/Quota_Mount_"$(date +"%m%d")".log
+    if [[ ! $(cat $log_path/Oracle_DB_"$(date +"%m%d")".log | grep "") ]]; then
+        quotaoff -avug
+        quotacheck -augmn
+        rm -rf aquota.*
+        quotacheck -augmn
 
-    touch aquota.user aquota.group
-    chmod 600 aquota.*
+        touch aquota.user aquota.group
+        chmod 600 aquota.*
 
-    quotacheck -augmn
-    quotaon -avug
-    setquota -g linuxuser 10M 10M 20 20 /quotahome
-    setquota -u samuel 0 0 10 10 /quotahome
-    setquota -u luikie 0 0 0 0 /quotahome
-    echo -e "$white$b_green"" Complete$cls  quota composition!"
+        quotacheck -augmn
+        quotaon -avug
+        setquota -g linuxuser 10M 10M 20 20 /quotahome
+        setquota -u samuel 0 0 10 10 /quotahome
+        setquota -u luikie 0 0 0 0 /quotahome
+        echo -e "$white$b_green"" Complete$cls  quota composition!"
+    else
+        _Handler Quota "$(date '+%H:%M:%S')" "$2"_Mount
+    fi
 }
 
 # 전달된 파라미터 필터링
@@ -81,5 +85,5 @@ if [[ $(mount | grep "/quotahome type ext4") ]]; then
         _QSettings $1 $2
     fi
 else
-   _Handler Quota "$(date '+%H:%M:%S')" Partition_Mount
+   _Handler Quota "$(date '+%H:%M:%S')" Check_Mount_Partition
 fi
