@@ -36,15 +36,22 @@ set_path="$data_path/settings.ini"
 net_path="/etc/sysconfig/network-scripts/ifcfg-enp4s0"
 
 
-
 if [[ -f "$set_path" ]]; then
-    ID=$(cat $set_path | grep "ID" | split -f2 -d "")
-    NICK=$(cat $set_path | grep "NICK" | cut -f2 -d "=")
-    NAME=$(cat $set_path | grep "NAME" | cut -f2 -d "=")
+    ID=$(cat $set_path | grep "ID =" | cut -f2 -d "=")
+    NICK=$(cat $set_path | grep "NICK =" | cut -f2 -d "=")
+    NAME=$(cat $set_path | grep "NAME =" | cut -f2 -d "=")
     IP=$(cat $set_path | grep "IP =" | cut -f2 -d "=")
     TO=$(cat $set_path | grep "TO =" | cut -f2 -d "=")
     FILES=$(cat $set_path | grep "FILES =" | cut -f2 -d "=")
     DIRECTORY=$(cat $set_path | grep "DIRECTORY =" | cut -f2 -d "=")
+
+    variables=("ID" "NICK" "NAME" "IP" "TO" "FILES" "DIRECTORY")
+    for space in "${variables[@]}"
+    do
+        var_value="${!space}"
+        var_value=$(echo "$var_value" | sed 's/ //g')
+        eval "$space=\"$var_value\""
+    done
 else
     _Handler '$data_path/settings.ini' "$(date '+%H:%M:%S')" exist
 fi
