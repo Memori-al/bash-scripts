@@ -61,7 +61,7 @@ _Init() {
         source $shell_path/messages.sh $1
         exit 1
     fi
-} 2>> $log_path/Init_"$(date +"%m%d")".log
+} 2>> /sm-shell/Log/Init_"$(date +"%m%d")".log
 
 # 예외 처리 핸들러
 _Handler() {
