@@ -2,10 +2,10 @@
 
 # DB Sorting 후 Score-result.txt 첨부 메일 송부
 _Send() {
-    domain="$2@$2.sm.jj.ac.kr"
-    subject="SM$4-$3-리눅스-6번-문제"
+    domain="$NICK@$NICK.sm.jj.ac.kr"
+    subject="$ID-$NAME-리눅스-6번-문제"
     body=$(cat <<-EOT
-        $3 메일 송부 드립니다.
+        $NAME 메일 송부 드립니다.
         한 학기 동안 감사했습니다!
         (별첨) score-result.txt
 EOT
@@ -37,23 +37,16 @@ _Minstall() {
 
 # 전달된 파라미터 필터링
 if [[ "$1" == "send" ]]; then
-    if [[ "$2" != "" ]]; then
-        if [[ "$3" != "" ]]; then
-            if [[ $(systemctl is-active sendmail) ]]; then
-                # $2 luikie $3 이강일 $4 15(수업번호)
-                _Send $1 $2 $3 $4 | /usr/sbin/sendmail -t
-                echo 
-                echo -e "$white$b_green"" Complete $cls  Mail transfer to "$line"lki_familiar@naver.com$cls"
-                echo 
-            else
-                _Handler sendmail "$(date '+%H:%M:%S')" service
-            fi
-        else
-            source /sm-shell/Resource/Scripts/messages.sh send
-        fi
+    if [[ $(systemctl is-active sendmail) ]]; then
+        _Send | /usr/sbin/sendmail -t
+        echo 
+        echo -e "$white$b_green"" Complete $cls  Mail transfer to "$line"$TO$cls"
+        echo 
     else
-        source /sm-shell/Resource/Scripts/messages.sh send
+        _Handler sendmail "$(date '+%H:%M:%S')" service
     fi
 elif [[ "$1" == "install" ]]; then
-    _MInstall
+    _Minstall
+else
+    source $shell_path/messages.sh send
 fi

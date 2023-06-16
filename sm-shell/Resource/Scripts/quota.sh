@@ -29,6 +29,15 @@ _QInstall() {
     do
         if [[ $(id "$user") ]]; then
             userdel $user
+            useradd -d /quotahome/$user $user
+            if [[ $user == "csejj" ]]; then
+                chgrp linuxuser /quotahome/$user
+                chmod g+s /quotahome/$user
+                usermod -a -G linuxuser $user
+            elif [[ $user == "samuel" ]]; then
+                chgrp linuxadmin /quotahome/$user
+                usermod -a -G linuxadmin $user
+            fi
         else
             useradd -d /quotahome/$user $user
             if [[ $user == "csejj" ]]; then
@@ -46,19 +55,18 @@ _QInstall() {
 _QSettings() {
     if [[ ! $(grep "$2 /quotahome ext4 defaults,usrjquota=aquota.user,grpjquota=aquota.group,jqfmt=vfsv0 1 2" "/etc/fstab") ]]; then
         echo "$2 /quotahome ext4 defaults,usrjquota=aquota.user,grpjquota=aquota.group,jqfmt=vfsv0 1 2">> /etc/fstab
-        mount -o remount,usrjquota,grpjquota $2
-        quotaoff -avug
-        quotacheck -augmn
-        rm -rf aquota.*
-        quotacheck -augmn
-
-        touch aquota.user aquota.group
-        chmod 600 aquota.*
-
-        quotacheck -augmn
-        quotaon -avug
     fi
-    
+    mount -o remount $2
+    quotaoff -avug
+    quotacheck -augmn
+    rm -rf aquota.*
+    quotacheck -augmn
+
+    touch aquota.user aquota.group
+    chmod 600 aquota.*
+
+    quotacheck -augmn
+    quotaon -avug
     setquota -g linuxuser 10M 10M 20 20 /quotahome
     setquota -u samuel 0 0 10 10 /quotahome
     setquota -u luikie 0 0 0 0 /quotahome
@@ -66,8 +74,12 @@ _QSettings() {
 }
 
 # 전달된 파라미터 필터링
-if [[ "$1" == "install" ]]; then
-    _QInstall
-elif [[ "$1" == "set" ]]; then
-    _QSettings $1 $2
+if [[ $(mount | grep "/quotahome type ext4") ]]; then
+    if [[ "$1" == "install" ]]; then
+        _QInstall
+    elif [[ "$1" == "set" ]]; then
+        _QSettings $1 $2
+    fi
+else
+   _Handler Quota "$(date '+%H:%M:%S')" Partition_Mount
 fi
