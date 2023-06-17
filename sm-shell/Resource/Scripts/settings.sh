@@ -35,7 +35,6 @@ log_path="/sm-shell/Log"
 set_path="$data_path/settings.ini"
 net_path="/etc/sysconfig/network-scripts/ifcfg-enp4s0"
 
-
 if [[ -f "$set_path" ]]; then
     ID=$(cat $set_path | grep "ID =" | cut -f2 -d "=")
     NICK=$(cat $set_path | grep "NICK =" | cut -f2 -d "=")
@@ -44,8 +43,10 @@ if [[ -f "$set_path" ]]; then
     TO=$(cat $set_path | grep "TO =" | cut -f2 -d "=")
     FILES=$(cat $set_path | grep "FILES =" | cut -f2 -d "=")
     DIRECTORY=$(cat $set_path | grep "DIRECTORY =" | cut -f2 -d "=")
+    DB=$(cat $set_path | grep "DB =" | cut -f2 -d "=")
+    TABLE=$(cat $set_path | grep "TABLE =" | cut -f2 -d "=")
 
-    variables=("ID" "NICK" "NAME" "IP" "TO" "FILES" "DIRECTORY")
+    variables=("ID" "NICK" "NAME" "IP" "TO" "FILES" "DIRECTORY" "DB" "TABLE")
     for space in "${variables[@]}"
     do
         var_value="${!space}"
@@ -53,7 +54,8 @@ if [[ -f "$set_path" ]]; then
         eval "$space=\"$var_value\""
     done
 else
-    _Handler '$data_path/settings.ini' "$(date '+%H:%M:%S')" exist
+    _Handler '$data_path/settings.ini' "$(date '+%H:%M:%S')" File_exist
+    exit 1
 fi
 
 # Network Settings
