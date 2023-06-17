@@ -46,6 +46,7 @@ if [[ -f "$set_path" ]]; then
     DB=$(cat $set_path | grep "DB =" | cut -f2 -d "=")
     TABLE=$(cat $set_path | grep "TABLE =" | cut -f2 -d "=")
 
+    # 변수 공백 제거
     variables=("ID" "NICK" "NAME" "IP" "TO" "FILES" "DIRECTORY" "DB" "TABLE")
     for space in "${variables[@]}"
     do
