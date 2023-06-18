@@ -1,5 +1,8 @@
 #!/bin/bash
-    # Data : packages.txt, local-repo.repo, httpd.conf, *.ora, oratab, .bash_profile
+#### 서버관리 자동화 SHELL SCRIPTS 시작부     ####
+#### AUTHOR : LEE KANG IL / SM15-LUIKIE     ####
+#### EMAIL  : lki_familiar@naver.com        ####
+#### GIT    : https://github.com/Memori-al  ####
 
 # 스크립트 동작부
 _Init() {
