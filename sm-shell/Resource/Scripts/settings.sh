@@ -45,9 +45,12 @@ if [[ -f "$set_path" ]]; then
     DIRECTORY=$(cat $set_path | grep "DIRECTORY =" | cut -f2 -d "=")
     DB=$(cat $set_path | grep "DB =" | cut -f2 -d "=")
     TABLE=$(cat $set_path | grep "TABLE =" | cut -f2 -d "=")
+    HEAD=$(cat $set_path | grep "HEAD =" | cut -f2 -d "=")
+    TAIL=$(cat $set_path | grep "TAIL =" | cut -f2 -d "=")
+    TYPE=$(cat $set_path | grep "TYPE =" | cut -f2 -d "=")
 
     # 변수 공백 제거
-    variables=("ID" "NICK" "NAME" "IP" "TO" "FILES" "DIRECTORY" "DB" "TABLE")
+    variables=("ID" "NICK" "NAME" "IP" "TO" "FILES" "DIRECTORY" "DB" "TABLE" "HEAD" "TAIL" "TYPE")
     for space in "${variables[@]}"
     do
         var_value="${!space}"
