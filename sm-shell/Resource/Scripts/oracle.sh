@@ -11,16 +11,18 @@ _OInstall() {
 _ODatabase() {
     source /home/oracle/.bash_profile
     if [[ -f "$log_path/Oracle_DB_S_"$(date +"%m%d")".log" ]]; then # BS_S 파일이 존재할 때 n 차 실행 시 
-        if [[ ! $(cat $log_path/Oracle_DB_S_"$(date +"%m%d")".log | grep "오류") ]]; then # BS_S 로그에 오류 문구 존재 시
-            sqlplus -S / as sysdba << SQL
+        if [[ ! $(cat $log_path/Oracle_DB_S_"$(date +"%m%d")".log | grep "오류") ]]; then # BS_S 로그에 오류 문구 존재하지 않을 때
+            sqlplus -S / as sysdba << SQL 
             startup mount;
             ALTER USER sys IDENTIFIED BY wjsansrk;
             commit;
             exit;
 SQL
+        else
+            _Handler oracle "$(date '+%H:%M:%S')" "$(cat $log_path/Oracle_DB_S_"$(date +"%m%d")".log | grep "오류")"
         fi
     else # BS_S 파일이 없을 때 즉 최초 실행 시
-        sqlplus -S / as sysdba << SQL
+        sqlplus -S / as sysdba << SQL 2> $log_path/Oracle_DB_S_"$(date +"%m%d")".log
         startup mount;
         ALTER USER sys IDENTIFIED BY wjsansrk;
         commit;
@@ -57,17 +59,17 @@ SQL
     # NID-00121 : 데이터 베이스가 열리면 안됨
     # NID-00135 : 오라클 활성 스레드 오류
    
-    nid target=sys DBNAME=$DB
+    nid target=sys DBNAME=$DB 2> $log_path/Oracle_DB_S_"$(date +"%m%d")".log
     if [[ ! $(cat $log_path/Oracle_DB_"$(date +"%m%d")".log | grep -o -e "NID-00106" -e "NID-00135" -e "ORA-01034" -e "NID-00121") ]]; then
         sed -i 's/export ORACLE_SID=ORCLCDB/export ORACLE_SID=$DB/g' /home/oracle/.bash_profile
         source /home/oracle/.bash_profile
-        sqlplus -S / as sysdba << SQL > $log_path/Oracle_DB_S_"$(date +"%m%d")".log
+        sqlplus -S / as sysdba << SQL 2> $log_path/Oracle_DB_S_"$(date +"%m%d")".log
         startup mount;
         ALTER database open resetlogs;
         exit;
 SQL
     else
-        _Handler oracle "$(date '+%H:%M:%S')" setdb
+        _Handler oracle "$(date '+%H:%M:%S')" "$(cat $log_path/Oracle_DB_"$(date +"%m%d")".log | grep -o -e "NID-00106" -e "NID-00135" -e "ORA-01034" -e "NID-00121")"
     fi
 }
 
