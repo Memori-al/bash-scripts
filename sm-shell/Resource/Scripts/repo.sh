@@ -17,6 +17,7 @@ cp /sm-shell/Resource/Data/local.repo /etc/yum.repos.d # 레포 복붙
 yum clean all # 레포 리스트 초기화
 yum repolist # 레포리스트 구성
 echo -e "$white$b_green"" Complete$cls  repo composition!"
-sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
-reboot
-# 마운트 > starter.sh repo > 구성 > 언마운트
+if [[ $(cat /etc/sysconfig/selinux | grep SELINUX=enforcing) ]]; then
+    sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+    reboot
+fi

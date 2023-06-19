@@ -52,6 +52,7 @@ _Ins() {
         systemctl restart mariadb
         mysql_secure_installation
         mysql -u root -p < $data_path/backup.dmp
+        systemctl restart mariadb
         systemctl restart httpd
     fi
 }
