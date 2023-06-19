@@ -44,22 +44,22 @@
 
 # <span style="color: #ffd700">Contents</span>
 ## 📖 Theory
-* [아키텍처](#Architecture)
-    * [도식도](#Scripts-Work-low)
+* [아키텍처](#architecture)
+    * [도식도](#-architecture-diagram)
 
 ## ⚙️ Technique
-* [기능 및 명령어](#Features-&-Commands)
+* [기능 및 명령어](#features--commands)
     * [명령어 표](#Command-and-parameters($))
 
 ## 🌱 Initial Setup
-* [`settings.sh` 초기 설정 방법](#Features-&-Commands)
-    * [사용자 설정](#Command-and-parameters($))
-    * [APM 설정](#Command-and-parameters($))
-    * [메일 설정](#Command-and-parameters($))
-    * [아이피 설정](#Command-and-parameters($))
-    * [DB 설정](#Command-and-parameters($))
-    * [정렬 알고리즘](#Command-and-parameters($))
-    * [(*개발자용) 스크립트 모듈 설정](#Command-and-parameters($))
+* [`settings.sh` 초기 설정 방법](#initial-setup)
+    * [사용자 설정](#1-사용자-설정)
+    * [APM 설정](#2-APM-설정)
+    * [메일 설정](#3-메일-설정)
+    * [IP 설정](#4-IP-설정)
+    * [DB 설정](#5-DB-설정)
+    * [정렬 알고리즘](#6-정렬-알고리즘-설정)
+    * [(*개발자용) 스크립트 모듈 설정](#7--개발자용--스크립트-모듈-설정)
 
 ## 🤗 Standardization
 * [표준화](#Features-&-Commands)
@@ -71,8 +71,8 @@
     * [oracle.sh](#Command-and-parameters($))
 
 ## 🔖 Reference
-* [Reference Link](#Features-&-Commands)
-   * [Bash Style 표준화 지침서](#1.-Reference-Link)
+* [Reference Link](#reference)
+   * [Bash Style 표준화 지침서](#1.-reference-link)
 
 <hr>
 
@@ -82,11 +82,9 @@
 
 ## · Architecture Diagram 
 
-AA :
-
 ```mermaid
 graph TD;
-    A-->B;
+    sm_final.sh-->settings.sh-->;
     A-->C;
     B-->D;
     C-->D;
