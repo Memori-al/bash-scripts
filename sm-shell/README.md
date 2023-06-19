@@ -63,12 +63,11 @@
 
 ## 🤗 Standardization
 * [표준화](#Features-&-Commands)
-    * [sm_final.sh](#Command-and-parameters($))
-    * [repo.sh](#Command-and-parameters($))
-    * [apm.sh](#Command-and-parameters($))
+    * [Function Renaming](#Command-and-parameters($))
+    * [Exception & Error Handling](#Command-and-parameters($))
+    * [HA Logging](#Command-and-parameters($))
     * [quota.sh](#Command-and-parameters($))
     * [mail.sh](#Command-and-parameters($))
-    * [oracle.sh](#Command-and-parameters($))
 
 ## 🔖 Reference
 * [Reference Link](#reference)
@@ -82,6 +81,7 @@
 
 ## · Architecture Diagram 
 
+AA : 
 ```mermaid
 graph TD;
     sm_final.sh-->settings.sh-->;
@@ -97,7 +97,10 @@ graph TD;
 <details>
 <summary> View </summary>
 
-## `Command` and `parameters($)`
+
+<center>
+
+## [명령어와 파라미터 인자]
 
 | Command | Parameters $1 | Parameters $2 | Description |
 | :---: | :---: | :---: | :---: |
@@ -116,14 +119,122 @@ graph TD;
 | | back | * | **DB 오류 발생** 시 이전 설정으로 **복구** |
 | | sql | * | **`<data.txt>`** 데이터 레코드를 <br>**final_record** 테이블에 자동 삽입<br>|
 | | sort | * | **`<data.txt>`** 데이터 레코드를<br>조건에 맞게 정렬 후 <br>**`<score_result.txt>`** 파일로 저장 |
+
+</center>
 </details>
 
+<br>
+
+<details>
+<summary> View </summary>
+<hr>
+
+### 1. repo 명령어
+
+```css
+[root@locahost sm-shell]# ./sm_final.sh repo
+```
+* /etc/yum.repo.d 에 존재하는 온라인 repo 를 모두 삭제하고, loca.repo 를 복사합니다.
+
+* 가장 많은 시간이 소요되는 `createrepo` 명령을 수행할 필요가 없어 `10초` 이내에 레포가 설치됩니다.
+
+<hr>
+
+### 2. rpm 명령어
+
+```css
+[root@localhost sm-shell]# ./sm_final.sh rpm
+-rw-r--r-- 1 root  root  56227  Jun 19  21:27 15-이강일-rpm-list.log
+```
+* 시스템에 존재하는 패키지 목록을 $ID-$NAME-rpm-list.log 로 저장합니다.
+
+<hr>
+
+### 3. apm 명령어
+
+```css
+[root@localhost sm-shell]# ./sm_final.sh apm split
+-rw-r--r-- 1 root  root  16589296  Jun 19  21:27 mysql-5.6.24.tar.gz.part-0
+-rw-r--r-- 1 root  root  16589296  Jun 19  21:27 mysql-5.6.24.tar.gz.part-1
+
+[root@localhost sm-shell]# ./sm_final.sh apm merge
+-rw-r--r-- 1 root  root  33178592  Jun 19  21:27 mysql-5.6.24.tar.gz
+```
+* split 명령어로 mysql-5.6.24.tar.gz 소스 압축파일을 2개로 분할합니다.
+* merge 명령어로 mysql-5.6.24.tar.gz.part0-1 분할 파일을 하나로 병합합니다.
+<br><br>
+
+```css
+[root@localhost sm-shell]# ./sm_final.sh apm install
+... # 설치 및 압축 해제 후
+Enter current password for root (enter for none): (엔터)
+Change the root password? [Y/n] y
+New password: (비밀번호 입력)
+Re-enter new password: (비밀번호 재입력)
+Remove anonymous users? [Y/n] y
+Disallow root login remotely? [Y/n] n
+Remove test database and access to it? [Y/n] y
+Reload privilege tables now? [Y/n] y
+
+```
+* Apache(2.4.6) PHP(5.4.16) Mariadb(5.5.68) 및 의존, 종속성 패키지 자동 설치
+* Web 소스 /var/www/html 압축 해제
+* DB 연결 후 복구
+<br><br>
+
+```css
+[root@localhost sm-shell]# ./sm_final.sh apm check
+```
+* APM 서비스 오류 유무를 확인합니다.
+> 서비스 정상 시 아무 메세지도 출력되지 않습니다.
+
+<br><br>
+<hr>
+
+### 4. quota 명령어
+
+```css
+[root@localhost ~]# mkdir /quotahome
+[root@localhost ~]# fdisk -l
+[root@localhost ~]# fdisk /dev/sda
+
+Command (m for help): n
+Partition type:
+   p   primary (3 primary, 0 extended, 1 free)
+   e   extended
+Select (default e): p
+Partition number (3-4, default 3): 3
+First sector (10001-209715, default 10001): 10001
+Last sector, +sectors or +size{K,M,G} (10000-209715, default 209715): +1G
+Partition 3 of type Linux and of size 1 GiB is set
+Command (m for help): w
+
+[root@localhost ~]# partprobe -s
+[root@localhost ~]# fdisk -l
+[root@localhost ~]# mkfs.ext4 /dev/sda3
+[root@localhost ~]# mount /dev/sda3 /quotahome
+[root@localhost ~]# cd /quotahome
+[root@localhost quotahome]# /sm-shell/sm_final.sh quota install
+```
+* 시스템에 존재하는 rpm list 를 $ID-$NAME-rpm-list.log 로 저장합니다.
+<br><br>
+
+```css
+[root@localhost quotahome]# /sm-shell/sm_final.sh quota set /dev/sda3
+
+[root@localhost quotahome]# mount -o remount /dev/sda3
+[root@localhost quotahome]# repquota -au
+[root@localhost quotahome]# repquota -ag
+```
+* `repquota -au` 사용자 quota 확인 명령어
+* `repquota -ag` 그룹 quota 확인 명령어
+</details>
 <br><hr>
 
 # <span style="color: #50bcdf">Initial Setup</span>
 
 ## 🏷️ `<settings.ini>` 설정
-<details>
+<details open>
 <summary> View </summary>
 
 <hr>
@@ -274,10 +385,60 @@ MODULES = settings, repo, apm, quota, mail, oracle, messages
 
 ### 참고 자료를 활용한 코드 표준화 작업
 
-## 1. sm_final.sh (`main`)
-```sh
-   echo a
+## 1. Function Renaming (`main`)
+```bash
+# Global _Function > __Function
+__Global_Function() {
+    ...
+} 
+
+# Local _Function > __Function
+_Local_Function() {
+    ...
+} 
+
 ```
+* 전역 함수는 `Underbar(_) 2개`로 구분합니다.
+* 지역 함수는 `Underbar(_) 1개`로 구분합니다.
+---
+<br>
+
+## 2. Exception & Error Handling (`main`)
+```bash
+# Exception $ Error Send
+__Function() {
+    ... # 정상 출력
+else # 예외 및 오류 발생
+    # __Handler:함수호출 $Function:오류함수 $date:발생시간 $Error_Out:오류전달"
+    __Handler "$Function" "$date" "$Error_Out"
+}
+
+# Exception & Error Handler
+__Handler() {
+    # 전달 받은 인자 출력
+    echo -e "$white""$b_red[$2] $1 $3 Error$cls"
+}
+
+```
+* 오류 발생 값을 `파라미터`로 `명확하게 전달`하는 구문을 사용합니다.
+* 예외 및 오류 처리를 위한 `핸들링 함수`를 추가합니다.
+---
+<br>
+
+## 3. HA Logging (`main`)
+```bash
+# Exception & Error Handler
+__Handler() {
+    # 전달 받은 인자 Error_$date.log Append Logging
+    echo "[$2] $1 $3 Error" >> $log_path/Error_"$(date +"%m%d")".log
+    echo -e "$white""$b_red[$2] $1 $3 Error$cls"
+} 2>> $log_path/Error_"$(date +"%m%d")".log
+
+```
+* `2>> ./path/file` Redirection 명령줄로 `성공 | 오류` 표준 입출력을 지정합니다.
+* 코드를 효율적으로 관리하기 위하여 각 함수 별로 표준 입출력 및 동작 로그를 저장합니다.
+---
+<br>
 </details>
 
 <br><hr>
