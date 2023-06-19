@@ -82,9 +82,11 @@
 
 ## · Architecture Diagram 
 
+AA :
+
 ```mermaid
 graph TD;
-    sm_final.sh-->settings.sh-->;
+    A-->B;
     A-->C;
     B-->D;
     C-->D;
