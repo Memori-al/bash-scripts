@@ -43,8 +43,12 @@ if [[ -f "$set_path" ]]; then
     TO=$(cat $set_path | grep "TO =" | cut -f2 -d "=")
     FILES=$(cat $set_path | grep "FILES =" | cut -f2 -d "=")
     DIRECTORY=$(cat $set_path | grep "DIRECTORY =" | cut -f2 -d "=")
+
+    # DB 설정 변수
     DB=$(cat $set_path | grep "DB =" | cut -f2 -d "=")
     TABLE=$(cat $set_path | grep "TABLE =" | cut -f2 -d "=")
+
+    # SORT 설정 변수
     HEAD=$(cat $set_path | grep "HEAD =" | cut -f2 -d "=")
     TAIL=$(cat $set_path | grep "TAIL =" | cut -f2 -d "=")
     TYPE=$(cat $set_path | grep "TYPE =" | cut -f2 -d "=")

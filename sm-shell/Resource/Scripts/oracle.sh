@@ -30,7 +30,14 @@ SQL
 SQL
     fi
 
-    cp -rf $data_path/initlinuxDB.ora /opt/oracle/dbs/init$DB.ora
+    # initlinuxDB.ora /opt/oracle/dbs 경로에 복사
+    if [[ ! -f "$data_path/init$DB.ora" ]]; then
+        cp -rf $data_path/init$DB.ora /opt/oracle/dbs
+        if [[ ! $(cat /etc/opt/oracle/dbs/init$DB.ora | grep "$DB") ]]; then
+            sed -i 's/linuxDB/$DB/g' /etc/opt/oracle/dbs/init$DB.ora
+        fi
+    fi
+    
     file_lists=("listener.ora" "tnsnames.ora" "oratab")
     for file_list in "${file_lists[@]}";
     do
