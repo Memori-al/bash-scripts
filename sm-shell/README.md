@@ -63,9 +63,9 @@
 
 ## 🤗 Standardization
 * [표준화](#Features-&-Commands)
-    * [Function Renaming](#Command-and-parameters($))
-    * [Exception & Error Handling](#Command-and-parameters($))
-    * [HA Logging](#Command-and-parameters($))
+    * [Function Renaming](#1.-Function-Renaming)
+    * [Exception & Error Handling](#2.-Exception--Error-Handling)
+    * [HA Logging](#3.-HA-Logging)
     * [quota.sh](#Command-and-parameters($))
     * [mail.sh](#Command-and-parameters($))
 
