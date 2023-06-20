@@ -374,12 +374,14 @@ MODULES = settings, repo, apm, quota, mail, oracle, messages
 
 # <span style="color: #50bcdf">Standardization</span>
 
+<details open>
+<summary> View </summary>
+<br>
+
+## 1. Function Renaming (`main`)
 <details>
 <summary> View </summary>
 
-### 참고 자료를 활용한 코드 표준화 작업
-
-## 1. Function Renaming (`main`)
 ```bash
 # Global _Function > __Function
 __Global_Function() {
@@ -394,10 +396,16 @@ _Local_Function() {
 ```
 * 전역 함수는 `Underbar(_) 2개`로 구분합니다.
 * 지역 함수는 `Underbar(_) 1개`로 구분합니다.
+</details>
+
 ---
+
 <br>
 
 ## 2. Exception & Error Handling (`main`)
+<details>
+<summary> View </summary>
+
 ```bash
 # Exception $ Error Send
 __Function() {
@@ -416,10 +424,16 @@ __Handler() {
 ```
 * 오류 발생 값을 `파라미터`로 `명확하게 전달`하는 구문을 사용합니다.
 * 예외 및 오류 처리를 위한 `핸들링 함수`를 추가합니다.
+</details>
+
 ---
+
 <br>
 
 ## 3. HA Logging (`main`)
+<details>
+<summary> View </summary>
+
 ```bash
 # Exception & Error Handler
 __Handler() {
@@ -431,8 +445,8 @@ __Handler() {
 ```
 * `2>> ./path/file` Redirection 명령줄로 `성공 | 오류` 표준 입출력을 지정합니다.
 * 코드를 효율적으로 관리하기 위하여 각 함수 별로 표준 입출력 및 동작 로그를 저장합니다.
----
-<br>
+    </details> 
+
 </details>
 
 <br><hr>
