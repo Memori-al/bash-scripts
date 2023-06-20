@@ -128,9 +128,9 @@ graph TD;
 ```css
 [root@locahost sm-shell]# ./sm_final.sh repo
 ```
-* /etc/yum.repo.d 에 존재하는 온라인 repo 를 모두 삭제하고, loca.repo 를 복사합니다.
-
-* 가장 많은 시간이 소요되는 `createrepo` 명령을 수행할 필요가 없어 `10초` 이내에 레포가 설치됩니다.
+* repo 명령 입력 시 아래와 같은 동작을 수행합니다.
+    - /etc/yum.repo.d 에 존재하는 온라인 repo 를 모두 삭제하고, loca.repo 를 복사합니다.
+    - 가장 많은 시간이 소요되는 `createrepo` 명령을 수행할 필요가 없어 `10초` 이내에 레포가 설치됩니다.
 
 <hr>
 
@@ -171,18 +171,19 @@ Remove test database and access to it? [Y/n] y
 Reload privilege tables now? [Y/n] y
 
 ```
-* Apache(2.4.6) PHP(5.4.16) Mariadb(5.5.68) 및 의존, 종속성 패키지 자동 설치
-* Web 소스 /var/www/html 압축 해제
-* DB 연결 후 복구
+* apm `install` 명령 사용 시 아래와 같은 동작이 수행됩니다.
+    - Apache(2.4.6) PHP(5.4.16) Mariadb(5.5.68) 및 의존, 종속성 패키지 자동 설치
+    - Web 소스 /var/www/html 압축 해제 후 권한 부여
+    - DB 연결 후 복구
 <br><br>
 
 ```css
 [root@localhost sm-shell]# ./sm_final.sh apm check
 ```
 * APM 서비스 오류 유무를 확인합니다.
-> 서비스 정상 시 아무 메세지도 출력되지 않습니다.
+> ℹ️ 서비스 비정상 동작 시에만 오류 메세지 출력
 
-<br><br>
+<br>
 <hr>
 
 ### 4. quota 명령어
@@ -208,13 +209,36 @@ Command (m for help): w
 [root@localhost ~]# mkfs.ext4 /dev/sda3
 [root@localhost ~]# mount /dev/sda3 /quotahome
 [root@localhost ~]# cd /quotahome
-[root@localhost quotahome]# /sm-shell/sm_final.sh quota install
 ```
-* 시스템에 존재하는 rpm list 를 $ID-$NAME-rpm-list.log 로 저장합니다.
-<br><br>
+* 위와 같이 초기 파티션 설정을 해줍니다.
+* 보통 디스크 이름은 HDD : `sda`, SSD : `nvme0n1p` 입니다.
+> ℹ️  `fdisk -l` 명령으로 정확한 파티션을 지정해줘야 합니다.
+
+<br>
+
+```css
+[root@localhost quotahome]# /sm-shell/sm_final.sh quota install
+[root@localhost quotahome]# ls -al
+.
+..
+...
+drwxr--r-- 1 root  root  33 Jun 19  21:27 csejj
+drwxr--r-- 1 root  root  33 Jun 19  21:27 samuel
+drwxr--r-- 1 root  root  33 Jun 19  21:27 luikie
+drwxr--r-- 1 root  root  0  Jun 19  21:27 lost+found
+```
+* 초기 파티션 설정 후 명령어를 입력해 사용자 및 그룹을 자동 구성합니다.
+* `ls-al` 명령어 실행 결과가 위와 같다면 성공입니다.
+* `lost+found` 디렉토리는 ext4 파일 시스템으로 포맷되었다는 것을 의미합니다.
+> ℹ️ `lost+found` 디렉토리가 존재하지 않는 경우 마운트 재확인
+
+<br>
 
 ```css
 [root@localhost quotahome]# /sm-shell/sm_final.sh quota set /dev/sda3
+[quotaoff] off /dev/sda3
+[quotaon] on /dev/sda3
+[quota] completed
 
 [root@localhost quotahome]# mount -o remount /dev/sda3
 [root@localhost quotahome]# repquota -au
@@ -222,7 +246,105 @@ Command (m for help): w
 ```
 * `repquota -au` 사용자 quota 확인 명령어
 * `repquota -ag` 그룹 quota 확인 명령어
+
+<br><hr>
+
+### 5. sendmail 명령어
+```css
+[root@localhost ~]# /sm-shell/sm_final.sh mail install
+```
+* `mail install` 명령어는 sendmail 및 의존 · 종속 패키지를 설치합니다.
+<br><br>
+
+```css
+[root@localhost ~]# /sm-shell/sm_final.sh mail send
+```
+* 미리 설정해둔 이메일 주소로 `score_result.txt` 첨부 메일을 송부합니다.
+> ℹ️  메일 첨부 양식
+> > <details><summary>View</summary>
+> > attachment="/sm-shell/score_result.txt"<br>
+> > echo "From: $domain"<br>
+> > echo "To: lki_familiar@naver.com, $domain"<br>
+> > echo "Subject: $subject"<br>
+> > echo "Content-Type: multipart/mixed; boundary=XYZ"<br>
+> > echo ""<br>
+> > echo "--XYZ"<br>
+> > echo "Content-Type: text/plain; charset=utf-8"<br>
+> > echo ""<br>
+> > echo "$body"<br>
+> > echo "--XYZ"<br>
+> > echo "Content-Type: text/plain"<br>
+> > echo "Content-Disposition: attachment; filename=\"score-result.txt\""<br>
+> > echo ""<br>
+> > cat "$attachment"<br>
+> > echo "--XYZ--"<br>
+> > EOF
 </details>
+
+<br><hr>
+### 6. Oracle 명령어
+
+```css
+[oracle@localhost home]# /sm-shell/sm_final.sh oracle install
+```
+* `oracle install` 명령 사용 시 아래와 같은 동작이 수행됩니다
+    - Oracle 21c Preinstall, EE 설치
+    - /etc/init.d/oracledb_ORCLCDB-21c configure 명령으로 초기 DB 구축
+    - oracle 사용자 dba 그룹 추가 후 비밀번호 wjsansrk 설정
+    - .bash_profile oracle 홈 디렉토리에 복사
+>  ℹ️  설치 및 초기 DB 구성까지 약 10분 소요됩니다.
+
+<br>
+
+```css
+[oracle@localhost home]# /sm-shell/sm_final.sh oracle setdb
+[oracle@localhost home]# ora
+SQL> select name from v$database;
+```
+* `oracle setdb` 명령 사용 시 아래와 같은 동작이 수행됩니다.
+    - oracle 홈 디렉토리에 복사한 .bash_profile 적용
+    - sql 실행하고 sys(db) 사용자 비밀번호를 wjsansrk 로 변경 후 저장
+    - DB 명 변경에 필요한 데이터 파일 복사
+    - nid 명령어로 연결된 DB 명 변경
+    - sql 실행하고 DB 명 변경을 위한 DB 리셋 후 종료
+
+>  ℹ️  오류 발생 시 `/sm-shell/Log/Oracle_*.log` 로그 파일을 확인하세요.
+
+<br>
+
+```css
+[oracle@localhost home]# /sm-shell/sm_final.sh oracle back
+```
+* `oracle setdb` 명령 수행 후 오류 발생 시 초기 상태로 복구해주는 명령어입니다.
+<br><br>
+
+```css
+[oracle@localhost home]# /sm-shell/sm_final.sh oracle sql
+[oracle@localhost home]# ora
+SQL> select * from final_record;
+```
+* `oracle sql` 명령 사용 시 아래와 같은 동작이 수행됩니다.
+    - sql 실행하고 final_record 테이블 생성
+    - sqlldr(sql loader) 를 사용하여 `./Resource/Data/score.txt` 데이터 삽입
+
+<br>
+
+```css
+[root@localhost ~]# /sm-shell/sm_final.sh oracle sort
+```
+* 미리 설정해둔 조건으로 `./Resource/Data/score.txt` 데이터 정렬 후 `./score_result.txt` 파일로 저장합니다.
+<br><br>
+
+```css
+[root@localhost ~]# ls -al /sm-shell | grep score*
+[root@localhost ~]# /sm-shell/sm_final.sh mail send
+```
+* `ls -al` 명령어로 score_result.txt 파일 존재 유무 확인
+* `mail send` 명령어로 미리 설정한 이메일 주소로 첨부 메일 송부
+
+> ℹ️  `'./Resource/Data/settings.ini'`<br> > TO 필드에 설정된 이메일 주소로 전송됩니다.
+</details>
+
 <br><hr>
 
 # <span style="color: #50bcdf">Configuration</span>
