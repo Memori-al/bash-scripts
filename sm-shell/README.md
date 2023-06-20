@@ -52,7 +52,7 @@
     * [명령어 표](#Command-and-parameters($))
 
 ## 🌱 Configuration
-* [`settings.sh` 초기 설정 방법](#Configuration)
+* [settings.sh 초기 설정 방법](#Configuration)
     * [사용자 설정](#1-사용자-설정)
     * [APM 설정](#2-APM-설정)
     * [메일 설정](#3-메일-설정)
@@ -66,8 +66,6 @@
     * [Function Renaming](#1.-Function-Renaming)
     * [Exception & Error Handling](#2.-Exception--Error-Handling)
     * [HA Logging](#3.-HA-Logging)
-    * [quota.sh](#Command-and-parameters($))
-    * [mail.sh](#Command-and-parameters($))
 
 ## 🔖 Reference
 * [Reference Link](#reference)
