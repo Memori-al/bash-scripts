@@ -63,9 +63,9 @@
 
 ## 🤗 Standardization
 * [표준화](#Features-&-Commands)
-    * [Function Renaming](#1.-Function-Renaming-main)
-    * [Exception & Error Handling](#2.-Exception--Error-Handling-main)
-    * [HA Logging](#3.-HA-Logging-main)
+    * [Function Renaming](#1-Function-Renaming-main)
+    * [Exception & Error Handling](#2-Exception--Error-Handling-main)
+    * [HA Logging](#3-HA-Logging-main)
 
 ## 🔖 Reference
 * [Reference Link](#reference)
