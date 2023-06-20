@@ -51,13 +51,8 @@
 * [기능 및 명령어](#features--commands)
     * [명령어 표](#Command-and-parameters($))
 
-<<<<<<< HEAD
 ## 🌱 Configuration
 * [`settings.sh` 초기 설정 방법](#Configuration)
-=======
-## 🌱 Initial Setup
-* [`settings.sh` 초기 설정 방법](#initial-setup)
->>>>>>> 7a9786a96ad3e4505e4c8a0a5219ae36fe3bfaeb
     * [사용자 설정](#1-사용자-설정)
     * [APM 설정](#2-APM-설정)
     * [메일 설정](#3-메일-설정)
@@ -103,14 +98,6 @@ graph TD;
 <details>
 <summary> View </summary>
 
-<<<<<<< HEAD
-=======
-
-<center>
-
-## [명령어와 파라미터 인자]
-
->>>>>>> 7a9786a96ad3e4505e4c8a0a5219ae36fe3bfaeb
 | Command | Parameters $1 | Parameters $2 | Description |
 | :---: | :---: | :---: | :---: |
 | `repo` | * | * | 로컬 저장소 10초 내에 구성 |
@@ -129,18 +116,11 @@ graph TD;
 | | sql | * | **`<data.txt>`** 데이터 레코드를 <br>**final_record** 테이블에 자동 삽입<br>|
 | | sort | * | **`<data.txt>`** 데이터 레코드를<br>조건에 맞게 정렬 후 <br>**`<score_result.txt>`** 파일로 저장 |
 
-<<<<<<< HEAD
-=======
-</center>
->>>>>>> 7a9786a96ad3e4505e4c8a0a5219ae36fe3bfaeb
 </details>
 
 <br>
 
-<<<<<<< HEAD
 ## 🏷️ Command
-=======
->>>>>>> 7a9786a96ad3e4505e4c8a0a5219ae36fe3bfaeb
 <details>
 <summary> View </summary>
 <hr>
