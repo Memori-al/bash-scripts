@@ -1,6 +1,6 @@
 <hr>
 
-# <span style="color: #50bcdf">Overview</span>
+# 👁️‍🗨️ <span style="color: #50bcdf">Overview</span>
 ### 🎯 제작 목적
  * 안녕하세요! 😃 전주대학교 **19**학번 **이강일**입니다.<br>
  리눅스를 어려워하는 🌿동기 및 후배분들을 위해 본 스크립트를 제작하게 되었습니다.
@@ -42,14 +42,13 @@
     * Indent    :   4
 <hr>
 
-# <span style="color: #ffd700">Contents</span>
+# 📜 <span style="color: #ffd700">Contents</span>
 ## 📖 Theory
 * [아키텍처](#architecture)
     * [도식도](#-architecture-diagram)
 
-## ⚙️ Technique
-* [기능 및 명령어](#features--commands)
-    * [명령어 표](#Command-and-parameters($))
+## ⚙️ Command Table
+* [명령어 표](#Command-Table)
 
 ## 🌱 Configuration
 * [settings.sh 초기 설정 방법](#Configuration)
@@ -61,11 +60,34 @@
     * [정렬 알고리즘](#6-정렬-알고리즘-설정)
     * [(*개발자용) 스크립트 모듈 설정](#7--개발자용--스크립트-모듈-설정)
 
+## 📃 Guide
+* [쉘 사용 가이드](#guide)
+    * [repo 명령어]()
+    * [rpm 명령어]()
+    * [apm 명령어]()
+        * [split 명령어]()
+        * [merge 명령어]()
+        * [install 명령어]()
+        * [check 명령어]()
+    * [quota 명령어]()
+        * [초기 설정]()
+        * [install 명령어]()
+        * [set 명령어]()
+    * [sendmail 명령어]()
+        * [install 명령어]()
+        * [send 명령어]()
+    * [oracle 명령어]()
+        * [install 명령어]()
+        * [setdb 명령어]()
+        * [back 명령어]()
+        * [sql 명령어]()
+        * [sort 명령어]()
+
 ## 🤗 Standardization
 * [표준화](#Features-&-Commands)
     * [Function Renaming](#1-Function-Renaming-main)
     * [Exception & Error Handling](#2-Exception--Error-Handling-main)
-    * [HA Logging](#3-HA-Logging-main)
+    * [HA Logging](#3-High-Available-Logging-main)
 
 ## 🔖 Reference
 * [Reference Link](#reference)
@@ -73,7 +95,7 @@
 
 <hr>
 
-# <span style="color: #50bcdf">Architecture</span>
+# 🧱 <span style="color: #50bcdf">Architecture</span>
 <details>
 <summary> View </summary>
 
@@ -91,8 +113,8 @@ graph TD;
 
 <br><hr>
 
-# <span style="color: #50bcdf">Features & Commands</span>
-## 🏷️ Table
+# 🏷️ Command Table
+## 🏷️ 명령어 테이블
 <details>
 <summary> View </summary>
 
@@ -116,14 +138,158 @@ graph TD;
 
 </details>
 
-<br>
+<br><hr>
 
-## 🏷️ Command
+# ⚙️ Configuration
+
+## 🏷️ `<settings.ini>` 설정
+<details open>
+<summary> View </summary>
+
+<hr>
+
+### 1. 사용자 설정
 <details>
+<summary> View </summary>
+
+```css
+[USER DATA]
+ID = 15
+NICK = luikie
+NAME = 이강일
+```
+| 필드 | 값 | 설명 |
+| :---: | :---: | :---: |
+|`ID`| 15 |수업번호를 의미합니다.
+|`NICK`| luikie |수업별칭을 의미합니다.
+|`NAME`| 이강일 |본인의 이름을 의미합니다.
+</details>
+
+<hr>
+
+### 2. APM 설정
+<details>
+<summary> View </summary>
+
+```css
+[APM DATA]
+FILES = xe.tar.gz
+DIRECTORY = xe
+```
+| 필드 | 값 | 설명 |
+| :---: | :---: | :---: |
+|`FILES`| xe.tar.gz |웹 소스 파일명
+|`DIRECTORY`| xe |압축 해제 후 저장되는 폴더명
+</details>
+
+<hr>
+
+### 3. 메일 설정
+<details>
+<summary> View </summary>
+
+```css
+[MAIL DATA]
+TO = 이메일 주소
+```
+| 필드 | 값 | 설명 |
+| :---: | :---: | :---: |
+|`TO`| 이메일 주소 | 전송할 이메일 주소 입력
+</details>
+
+<hr>
+
+### 4. IP 설정
+<details>
+<summary> View </summary>
+
+```css
+[IP DATA]
+IP = 본인 자리의 아이피 주소
+```
+| 필드 | 값 | 설명 |
+| :---: | :---: | :---: |
+|`IP`| 본인 자리의 아이피 주소 | 시험 자리 아이피 입력
+</details>
+
+<hr>
+
+### 5. DB 설정
+<details>
+<summary> View </summary>
+
+```css
+[ORACLE DATA]
+DB = linuxDB
+TABLE = final_record
+```
+| 필드 | 값 | 설명 |
+| :---: | :---: | :---: |
+|`DB`| linuxDB | 변경할 DB 명
+|`TABLE`| final_record | 생성 · 삽입할 TABLE 명
+</details>
+
+<hr>
+
+### 6. 정렬 알고리즘 설정
+<details>
+<summary> View </summary>
+
+```css
+[SORT DATA]
+HEAD = 5
+TAIL = 5
+TYPE = 1
+```
+| 필드 | 값 | 설명 |  | 조건 |
+| :---: | :---: | :---: | :---: |:---: |
+|`HEAD`| 5 | 위부터 아래로 5 라인 설정 ||
+|`TAIL`| 5 | 아래부터 위로 5 라인 설정 || 
+|`TYPE`| 0 | 정렬 알고리즘 유형 ||자신의 위아래 10개 데이터의 수업번호가 한 가지 조건일 때<br>1~10, 11~20, 21~30, 31~40 해당
+|| 1 | 정렬 알고리즘 유형 ||수업번호 01∼10번까지는 학년 순으로 만약 같으면 그룹 순<br>수업번호 11∼20번까지는 이름 순과 만약 같으면 학년 순
+|| 2 | 정렬 알고리즘 유형 ||수업번호 11∼20번까지는 이름 순과 만약 같으면 학년 순<br>수업번호 21∼30번까지는 그룹 순과 만약 같으면 학년 순
+|| 3 | 정렬 알고리즘 유형 ||수업번호 21∼30번까지는 그룹 순과 만약 같으면 학년 순<br>수업번호 31∼40번까지는 학점 순과 만약 같으면 학년 순
+|| 4 | 정렬 알고리즘 유형 ||수업번호 31∼40번까지는 학점 순과 만약 같으면 학년 순<br>수업번호 41∼48번까지는 높은 학년 순과 만약 같으면 그룹 순
+
+`[예시] : 자신의 위 5, 아래 4 10개의 데이터가 8 ~ 17 범위에 포함될 때`<br>
+* HEAD  = 3<br>
+* TAIL  = 7<br>
+* TYPE  = 1 <br>
+### 따라서 `[TYPE 1]` 알고리즘으로 8~10 번(HEAD 3), 11~17 번(TAIL 7) 정렬이 가능함
+</details>
+
+<hr>
+
+### 7. * **개발자용** * 스크립트 모듈 설정
+<details>
+<summary> View </summary>
+
+```css
+[SCRIPT DATA]
+MODULES = settings, repo, apm, quota, mail, oracle, messages
+```
+| 필드 | 값 | 설명 |
+| :---: | :---: | :---: |
+|`MODULES`| settings, repo, apm, quota, mail, oracle, messages| 사용자 정의 스크립트 파일을 `./Resource/Scripts/`<br> 경로에 저장 후 추가하여 자동 연결
+
+### * <span style="color: #DA4354">안정성과 호환성을 위하여, 개발자 설정 부분을 최대한 수정하지 않는 것을 권장합니다.</span>
+</details>
+</details>
+</details>
+
+
+<hr>
+
+# 📃 Guide
+
+## 🏷️ 명령어 가이드
+<details open>
 <summary> View </summary>
 <hr>
 
 ### 1. repo 명령어
+<details>
+<summary> View </summary>
 
 ```css
 [root@locahost sm-shell]# ./sm_final.sh repo
@@ -131,20 +297,24 @@ graph TD;
 * repo 명령 입력 시 아래와 같은 동작을 수행합니다.
     - /etc/yum.repo.d 에 존재하는 온라인 repo 를 모두 삭제하고, loca.repo 를 복사합니다.
     - 가장 많은 시간이 소요되는 `createrepo` 명령을 수행할 필요가 없어 `10초` 이내에 레포가 설치됩니다.
-
+</details>
 <hr>
 
 ### 2. rpm 명령어
+<details>
+<summary> View </summary>
 
 ```css
 [root@localhost sm-shell]# ./sm_final.sh rpm
 -rw-r--r-- 1 root  root  56227  Jun 19  21:27 15-이강일-rpm-list.log
 ```
 * 시스템에 존재하는 패키지 목록을 $ID-$NAME-rpm-list.log 로 저장합니다.
-
+</details>
 <hr>
 
 ### 3. apm 명령어
+<details>
+<summary> View </summary>
 
 ```css
 [root@localhost sm-shell]# ./sm_final.sh apm split
@@ -182,11 +352,13 @@ Reload privilege tables now? [Y/n] y
 ```
 * APM 서비스 오류 유무를 확인합니다.
 > ℹ️ 서비스 비정상 동작 시에만 오류 메세지 출력
+</details>
 
-<br>
 <hr>
 
 ### 4. quota 명령어
+<details>
+<summary> View </summary>
 
 ```css
 [root@localhost ~]# mkdir /quotahome
@@ -214,7 +386,7 @@ Command (m for help): w
 * 보통 디스크 이름은 HDD : `sda`, SSD : `nvme0n1p` 입니다.
 > ℹ️  `fdisk -l` 명령으로 정확한 파티션을 지정해줘야 합니다.
 
-<br>
+<br><br>
 
 ```css
 [root@localhost quotahome]# /sm-shell/sm_final.sh quota install
@@ -246,10 +418,14 @@ drwxr--r-- 1 root  root  0  Jun 19  21:27 lost+found
 ```
 * `repquota -au` 사용자 quota 확인 명령어
 * `repquota -ag` 그룹 quota 확인 명령어
+</details>
 
-<br><hr>
+<hr>
 
 ### 5. sendmail 명령어
+<details>
+<summary> View </summary>
+
 ```css
 [root@localhost ~]# /sm-shell/sm_final.sh mail install
 ```
@@ -281,9 +457,15 @@ drwxr--r-- 1 root  root  0  Jun 19  21:27 lost+found
 > > EOF
 </details>
 
-<br><hr>
-### 6. Oracle 명령어
+<hr>
 
+### 6. Oracle 명령어
+<details>
+<summary> View </summary>
+
+---
+#### 6-1. oracle install
+___
 ```css
 [oracle@localhost home]# /sm-shell/sm_final.sh oracle install
 ```
@@ -296,6 +478,9 @@ drwxr--r-- 1 root  root  0  Jun 19  21:27 lost+found
 
 <br>
 
+___
+#### 6-2. oracle setdb
+___
 ```css
 [oracle@localhost home]# /sm-shell/sm_final.sh oracle setdb
 [oracle@localhost home]# ora
@@ -312,12 +497,18 @@ SQL> select name from v$database;
 
 <br>
 
+___
+#### 6-3. oracle back
+___
 ```css
 [oracle@localhost home]# /sm-shell/sm_final.sh oracle back
 ```
 * `oracle setdb` 명령 수행 후 오류 발생 시 초기 상태로 복구해주는 명령어입니다.
 <br><br>
 
+___
+#### 6-4. oracle sql
+___
 ```css
 [oracle@localhost home]# /sm-shell/sm_final.sh oracle sql
 [oracle@localhost home]# ora
@@ -329,12 +520,18 @@ SQL> select * from final_record;
 
 <br>
 
+___
+#### 6-5. oracle sort
+___
 ```css
 [root@localhost ~]# /sm-shell/sm_final.sh oracle sort
 ```
 * 미리 설정해둔 조건으로 `./Resource/Data/score.txt` 데이터 정렬 후 `./score_result.txt` 파일로 저장합니다.
-<br><br>
+<br>
 
+___
+#### 6-6. oracle sort
+___
 ```css
 [root@localhost ~]# ls -al /sm-shell | grep score*
 [root@localhost ~]# /sm-shell/sm_final.sh mail send
@@ -345,160 +542,16 @@ SQL> select * from final_record;
 > ℹ️  `'./Resource/Data/settings.ini'`<br> > TO 필드에 설정된 이메일 주소로 전송됩니다.
 </details>
 
+</details>
+</details>
 <br><hr>
 
-# <span style="color: #50bcdf">Configuration</span>
+# 🤗 Standardization
 
-## 🏷️ `<settings.ini>` 설정
+## 📰 코드 표준화
 <details open>
 <summary> View </summary>
 
-<hr>
-
-### 1. 사용자 설정
-<details>
-<summary> View </summary>
-
-```css
-[USER DATA]
-ID = 15
-NICK = luikie
-NAME = 이강일
-```
-| 필드 | 값 | 설명 |
-| :---: | :---: | :---: |
-|`ID`| 15 |수업번호를 의미합니다.
-|`NICK`| luikie |수업별칭을 의미합니다.
-|`NAME`| 이강일 |본인의 이름을 의미합니다.
-</details>
-
-<br>
-<hr>
-
-### 2. APM 설정
-<details>
-<summary> View </summary>
-
-```css
-[APM DATA]
-FILES = xe.tar.gz
-DIRECTORY = xe
-```
-| 필드 | 값 | 설명 |
-| :---: | :---: | :---: |
-|`FILES`| xe.tar.gz |웹 소스 파일명
-|`DIRECTORY`| xe |압축 해제 후 저장되는 폴더명
-</details>
-
-<br>
-<hr>
-
-### 3. 메일 설정
-<details>
-<summary> View </summary>
-
-```css
-[MAIL DATA]
-TO = 이메일 주소
-```
-| 필드 | 값 | 설명 |
-| :---: | :---: | :---: |
-|`TO`| 이메일 주소 | 전송할 이메일 주소 입력
-</details>
-
-<br>
-<hr>
-
-### 4. IP 설정
-<details>
-<summary> View </summary>
-
-```css
-[IP DATA]
-IP = 본인 자리의 아이피 주소
-```
-| 필드 | 값 | 설명 |
-| :---: | :---: | :---: |
-|`IP`| 본인 자리의 아이피 주소 | 시험 자리 아이피 입력
-</details>
-
-<br>
-<hr>
-
-### 5. DB 설정
-<details>
-<summary> View </summary>
-
-```css
-[ORACLE DATA]
-DB = linuxDB
-TABLE = final_record
-```
-| 필드 | 값 | 설명 |
-| :---: | :---: | :---: |
-|`DB`| linuxDB | 변경할 DB 명
-|`TABLE`| final_record | 생성 · 삽입할 TABLE 명
-</details>
-
-<br>
-<hr>
-
-### 6. 정렬 알고리즘 설정
-<details>
-<summary> View </summary>
-
-```css
-[SORT DATA]
-HEAD = 5
-TAIL = 5
-TYPE = 1
-```
-| 필드 | 값 | 설명 |  | 조건 |
-| :---: | :---: | :---: | :---: |:---: |
-|`HEAD`| 5 | 위부터 아래로 5 라인 설정 ||
-|`TAIL`| 5 | 아래부터 위로 5 라인 설정 || 
-|`TYPE`| 0 | 정렬 알고리즘 유형 ||자신의 위아래 10개 데이터의 수업번호가 한 가지 조건일 때<br>1~10, 11~20, 21~30, 31~40 해당
-|| 1 | 정렬 알고리즘 유형 ||수업번호 01∼10번까지는 학년 순으로 만약 같으면 그룹 순<br>수업번호 11∼20번까지는 이름 순과 만약 같으면 학년 순
-|| 2 | 정렬 알고리즘 유형 ||수업번호 11∼20번까지는 이름 순과 만약 같으면 학년 순<br>수업번호 21∼30번까지는 그룹 순과 만약 같으면 학년 순
-|| 3 | 정렬 알고리즘 유형 ||수업번호 21∼30번까지는 그룹 순과 만약 같으면 학년 순<br>수업번호 31∼40번까지는 학점 순과 만약 같으면 학년 순
-|| 4 | 정렬 알고리즘 유형 ||수업번호 31∼40번까지는 학점 순과 만약 같으면 학년 순<br>수업번호 41∼48번까지는 높은 학년 순과 만약 같으면 그룹 순
-
-`[예시] : 자신의 위 5, 아래 4 10개의 데이터가 8 ~ 17 범위에 포함될 때`<br>
-* HEAD  = 3<br>
-* TAIL  = 7<br>
-* TYPE  = 1 <br>
-### 따라서 `[TYPE 1]` 알고리즘으로 8~10 번(HEAD 3), 11~17 번(TAIL 7) 정렬이 가능함
-</details>
-
-<br>
-
-<hr>
-
-### 7. * **개발자용** * 스크립트 모듈 설정
-<details>
-<summary> View </summary>
-
-```css
-[SCRIPT DATA]
-MODULES = settings, repo, apm, quota, mail, oracle, messages
-```
-| 필드 | 값 | 설명 |
-| :---: | :---: | :---: |
-|`MODULES`| settings, repo, apm, quota, mail, oracle, messages| 사용자 정의 스크립트 파일을 `./Resource/Scripts/`<br> 경로에 저장 후 추가하여 자동 연결
-
-### * <span style="color: #DA4354">안정성과 호환성을 위하여, 개발자 설정 부분을 최대한 수정하지 않는 것을 권장합니다.</span>
-</details>
-</details>
-</details>
-
-
-<br><hr>
-
-# <span style="color: #50bcdf">Standardization</span>
-
-<details open>
-<summary> View </summary>
-<br>
 
 ## 1. Function Renaming (`main`)
 <details>
@@ -521,8 +574,6 @@ _Local_Function() {
 </details>
 
 ---
-
-<br>
 
 ## 2. Exception & Error Handling (`main`)
 <details>
@@ -550,9 +601,7 @@ __Handler() {
 
 ---
 
-<br>
-
-## 3. HA Logging (`main`)
+## 3. High Available (`main`)
 <details>
 <summary> View </summary>
 
@@ -573,7 +622,7 @@ __Handler() {
 
 <br><hr>
 
-# <span style="color: #50bcdf">Reference</span>
+# 🔖 Reference
 <details>
 <summary> View </summary>
 
