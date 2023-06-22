@@ -12,7 +12,7 @@ elif [[ ! -d "/sm-shell/Resource/Rpm" ]]; then
     mkdir /sm-shell/Resource/Rpm
 fi
 
-rm -rf /etc/yum.repo.d/* # 이전 레포 삭제
+rm -rf /etc/yum.repos.d/* # 이전 레포 삭제
 cp /sm-shell/Resource/Data/local.repo /etc/yum.repos.d # 레포 복붙
 yum clean all # 레포 리스트 초기화
 yum repolist # 레포리스트 구성

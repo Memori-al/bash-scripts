@@ -51,7 +51,14 @@ _Init() {
         fi
     elif [[ "$1" == "mail" ]]; then # 첫번째로 전달된 인자가 mail 일 때
         if [[ "$2" == "send" ]]; then
-            source $shell_path/mail.sh send 2>> $log_path/Mail_Tranfer_"$(date +"%m%d")".log
+            if [[ "$3" == "local" ]]; then
+                source $shell_path/mail.sh send local 2>> $log_path/Mail_Tranfer_"$(date +"%m%d")".log
+            elif [[ "$3" == "global" ]]; then
+                source $shell_path/mail.sh send global 2>> $log_path/Mail_Tranfer_"$(date +"%m%d")".log
+            else 
+                source $shell_path/messages.sh mail
+                exit 1
+            fi
         elif [[ "$2" == "install" ]]; then
             source $shell_path/mail.sh install 2>> $log_path/Mail_Tranfer_"$(date +"%m%d")".log
         else

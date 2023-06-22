@@ -129,7 +129,8 @@ graph TD;
 | `quota` | install | * | Quota 서비스 설치 |
 | | set | `/dev/sda3` | 파라미터 $2 기반으로 Quota 자동 설정 |
 | `mail` | install | * | 설치된 패키지 목록 저장 |
-| | send | * | <`settings.ini`> 설정 파일 <br>TO = lki_familiar@naver.com <br> 메일 송부 |
+| | send | local | <`settings.ini`> 설정 파일 <br>`root@localhost.localdomain` 계정으로 TO = `lki_familiar@naver.com` 주소로 송부합니다. <br> 
+| | send | global | <`settings.ini`> 설정 파일 <br>`luikie@luikie.sm.jj.ac.kr` 계정으로 TO = `lki_familiar@naver.com` 주소로 송부합니다 |
 | `oracle` | install | * | Oracle 21c **Preinstall** & <br> **EE 서비스 설치** 및 **DB 생성** |
 | | setdb | * | <`settings.ini`> 설정 파일 <br>DB = linuxDB<br>TABLE = final_record<br> **DB 명 변경** 및 **테이블 생성**|
 | | back | * | **DB 오류 발생** 시 이전 설정으로 **복구** |
@@ -433,8 +434,13 @@ drwxr--r-- 1 root  root  0  Jun 19  21:27 lost+found
 <br><br>
 
 ```css
-[root@localhost ~]# /sm-shell/sm_final.sh mail send
+[root@localhost ~]# /sm-shell/sm_final.sh mail send local
+
+[root@localhost ~]# /sm-shell/sm_final.sh mail send global
 ```
+* `mail send local` 명령어는 root@localhost.localdomain 계정으로 전송합니다.
+* `mail send global` 명령어는 luikie@luikie.sm.jj.ac.kr 계정으로 전송합니다.
+    * TO 에 설정해둔 주소<br><br>
 * 미리 설정해둔 이메일 주소로 `score_result.txt` 첨부 메일을 송부합니다.
 > ℹ️  메일 첨부 양식
 > > <details><summary>View</summary>
