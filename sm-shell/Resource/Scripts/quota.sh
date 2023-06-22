@@ -1,7 +1,7 @@
 #!/bin/bash
 
 _QInstall() {
-    users=("samuel" "luikie" "csejj")
+    users=("samuel" "$NICK" "csejj")
     groups=("linuxadmin" "linuxuser")
 
     # quota 패키지 설치되지 않을 시 설치
@@ -70,7 +70,7 @@ _QSettings() {
         quotaon -avug
         setquota -g linuxuser 10M 10M 20 20 /quotahome
         setquota -u samuel 0 0 10 10 /quotahome
-        setquota -u luikie 0 0 0 0 /quotahome
+        setquota -u $NICK 0 0 0 0 /quotahome
         echo -e "$white$b_green"" Complete$cls  quota composition!"
     else
         _Handler Quota "$(date '+%H:%M:%S')" "$2"_Mount

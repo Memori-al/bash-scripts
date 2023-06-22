@@ -31,12 +31,12 @@ SQL
     fi
 
     # initlinuxDB.ora /opt/oracle/dbs 경로에 복사
-    if [[ ! -f "$data_path/init$DB.ora" ]]; then
-        cp -rf $data_path/init$DB.ora /opt/oracle/dbs
-        if [[ ! $(cat /etc/opt/oracle/dbs/init$DB.ora | grep "$DB") ]]; then
-            sed -i 's/linuxDB/$DB/g' /etc/opt/oracle/dbs/init$DB.ora
-        fi
-    fi
+    #if [[ ! -f "$data_path/init$DB.ora" ]]; then
+        cp -rf $data_path/initlinuxDB.ora /opt/oracle/dbs
+     #   if [[ ! $(cat /etc/opt/oracle/dbs/init$DB.ora | grep "$DB") ]]; then
+     #       sed -i 's/linuxDB/$DB/g' /etc/opt/oracle/dbs/init$DB.ora
+      #  fi
+    #fi
     
     file_lists=("listener.ora" "tnsnames.ora" "oratab")
     for file_list in "${file_lists[@]}";
@@ -53,11 +53,11 @@ SQL
     done
 
     # settinsg.ini 의 DB 명이 linuxDB 가 아닐 때
-    if [[ $DB != "linuxDB" ]]; then
-        sed -i 's/linuxDB.db/$DB.db/g' $ORACLE_HOME/network/admin/listener.ora
-        sed -i 's/linuxDB.db/$DB.db/g' $ORACLE_HOME/network/admin/tnsnames.ora
-        sed -i 's/linuxDB.db/$DB.db/g' /etc/oratab
-    fi
+#    if [[ $DB != "linuxDB" ]]; then
+#        sed -i 's/linuxDB.db/$DB.db/g' $ORACLE_HOME/network/admin/listener.ora
+#        sed -i 's/linuxDB.db/$DB.db/g' $ORACLE_HOME/network/admin/tnsnames.ora
+#        sed -i 's/linuxDB.db/$DB.db/g' /etc/oratab
+#    fi
 
     # 예외처리 오류 리스트
     # ORA-01034 : 오라클 존재하지 않음
@@ -66,7 +66,7 @@ SQL
     # NID-00121 : 데이터 베이스가 열리면 안됨
     # NID-00135 : 오라클 활성 스레드 오류
    
-    nid target=sys DBNAME=$DB 2> $log_path/Oracle_DB_S_"$(date +"%m%d")".log
+    nid target=sys DBNAME=linuxDB 2> $log_path/Oracle_DB_S_"$(date +"%m%d")".log
     if [[ ! $(cat $log_path/Oracle_DB_"$(date +"%m%d")".log | grep -o -e "NID-00106" -e "NID-00135" -e "ORA-01034" -e "NID-00121") ]]; then
         sed -i 's/export ORACLE_SID=ORCLCDB/export ORACLE_SID=$DB/g' /home/oracle/.bash_profile
         source /home/oracle/.bash_profile
@@ -81,7 +81,7 @@ SQL
 }
 
 _OBack() {
-    sed -i 's/export ORACLE_SID=$DB/export ORACLE_SID=ORCLCDB/g' /home/oracle/.bash_profile
+    sed -i 's/export ORACLE_SID=linuxDB/export ORACLE_SID=ORCLCDB/g' /home/oracle/.bash_profile
     source /home/oracle/.bash_profile
 }
 
@@ -125,8 +125,8 @@ _OSort() {
     fi
 
     if [[ $TYPE != "0" ]]; then
-        head -n $HEAD $data_path/score.txt > /sm-shell/score-1.txt
-        tail -n $TAIL $data_path/score.txt > /sm-shell/score-2.txt
+        head -n $HEAD $data_path/score.txt > /sm-shell/score_1.txt
+        tail -n $TAIL $data_path/score.txt > /sm-shell/score_2.txt
         sort $SORT_1 /sm-shell/score_1.txt > /sm-shell/score_result.txt
         sort $SORT_2 /sm-shell/score_2.txt >> /sm-shell/score_result.txt
     else
@@ -141,17 +141,12 @@ if [[ "$1" == "install" ]]; then
     _OInstall
 elif [[ "$1" == "sort" ]]; then
     _OSort
-fi
-if [[ $(whoami) == "oracle" ]]; then
-    if [[ "$1" == "setdb" ]]; then
-        _ODatabase
-    elif [[ "$1" == "sql" ]]; then
-        _OSql
-    elif [[ "$1" == "back" ]]; then
-        _OBack
-    else
-        source $shell_path/messages.sh oracle
-    fi
+elif [[ "$1" == "setdb" ]]; then
+    _ODatabase
+elif [[ "$1" == "sql" ]]; then
+    _OSql
+elif [[ "$1" == "back" ]]; then
+    _OBack
 else
-    echo -e "$white$b_red"" Warning $cls  only use oracle account."
+    source $shell_path/messages.sh oracle
 fi

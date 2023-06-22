@@ -4,6 +4,7 @@ _Split() {
     # Split Mysql.tar.gz
     split -n 2 -d -a 1 $data_path/mysql-5.6.24.tar.gz $data_path/mysql-5.6.24.tar.gz.part-
     rm -rf $data_path/mysql-5.6.24.tar.gz
+    pwd
     ls -al $data_path/ | grep part*
 }
 
@@ -11,6 +12,7 @@ _Merge() {
     # merge Mysql.tar.gz
     cat $data_path/*part* > $data_path/mysql-5.6.24.tar.gz
     rm -rf $data_path/*part*
+    pwd
     ls -al $data_path/ | grep mysql
 }
 

@@ -9,6 +9,8 @@ _Init() {
     source /sm-shell/Resource/Scripts/settings.sh
     # 전달된 파라미터 값 확인 후 매치
     if [[ "$1" == "rpm" ]]; then # 첫번째로 전달된 인자가 rpm 일 때
+        rpm -e --nodeps firewalld-filesystem-0.6.3-11.el7.noarch
+        rpm -e --nodeps python-firewall-0.6.3-11.el7.noarch
         rpm -qa > /sm-shell/"$ID"-"$NAME"-rpm-list.log
     elif [[ "$1" == "oracle" ]]; then # 첫번째로 전달된 인자가 oracle 일 때
         chmod 777 -R /sm-shell/Log/*

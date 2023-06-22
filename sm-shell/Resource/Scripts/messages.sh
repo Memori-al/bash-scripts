@@ -20,6 +20,8 @@ elif [[ "$1" == "mail" ]]; then
     echo -e "$usage {install|send}"
     echo -e $blue$bold"install$cls  : sendmail install & composition"
     echo -e $blue$bold"send$cls     : Send to score_result.txt file"
+    echo -e $blue$bold"send local$cls     : Send to score_result.txt file (root@localhost.localdomain)"
+    echo -e $blue$bold"send global$cls     : Send to score_result.txt file ($TO)"
 elif [[ "$1" == "help" ]]; then
     echo -e "$usage {rpm|repo|apm|oracle|quota|mail}"
     echo -e $blue$bold"rpm$cls       : rpm -qa list output"

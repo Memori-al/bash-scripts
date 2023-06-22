@@ -1,4 +1,3 @@
-LM06	박용현	3	lgt	C0
 LM07	백민규	2	lgt	D-
 LM08	김주연	4	kt	A+
 LM09	조윤호	4	lgt	C+
@@ -8,3 +7,4 @@ LM12	송연규	1	skt	C0
 LM13	박지혁	1	kt	B-
 LM14	장보란	3	lgt	A+
 LM15	임진성	3	kt	A+
+LM16	유현빈	4	lgt	D0
