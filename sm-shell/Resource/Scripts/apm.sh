@@ -56,6 +56,7 @@ _Ins() {
         mysql -u root -p < $data_path/backup.dmp
         systemctl restart mariadb
         systemctl restart httpd
+        setenforce 0
     fi
 }
 
