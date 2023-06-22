@@ -485,23 +485,85 @@ ___
 <br>
 
 ___
-#### 6-2. oracle setdb
+#### 6-2. oracle setdb (수동 설정)
 ___
+```css
+[oracle@localhost home]$ cd ~
+[oracle@localhost ~]$ cat .bash_profile | grep "ORACLE_SID"
+export ORACLE_SID=ORCLCDB
+```
+* 명령어 입력 시 export ORACLE_SID=ORCLCDB 가 출력되면 정상입니다.
+<br><br>
 
 ```css
-[root@localhost home]# su oracle
-[oracle@localhost home]$ /sm-shell/sm_final.sh oracle setdb
-[oracle@localhost home]$ ora
-SQL> select name from v$database;
+[oracle@localhost ~]$ source .bash_profile
+[oracle@localhost ~]$ ora
+SQL> shutdown immediate;
+SQL> startup mount;
+SQL> exit;
 ```
-* `oracle setdb` 명령 사용 시 아래와 같은 동작이 수행됩니다.
-    - oracle 홈 디렉토리에 복사한 .bash_profile 적용
-    - sql 실행하고 sys(db) 사용자 비밀번호를 wjsansrk 로 변경 후 저장
-    - DB 명 변경에 필요한 데이터 파일 복사
-    - nid 명령어로 연결된 DB 명 변경
-    - sql 실행하고 DB 명 변경을 위한 DB 리셋 후 종료
+* source .bash_profile 명령어로 설정을 적용해줍니다.
 
->  ℹ️  오류 발생 시 `/sm-shell/Log/Oracle_*.log` 로그 파일을 확인하세요.
+* ora 명령어로 db 접속해 위 SQL 명령어 3개를 순차적으로 입력합니다.
+<br><br>
+
+```css
+[oracle@localhost ~]$ nid target=sys dbname=linuxDB
+비밀번호 : wjsansrk
+... (생략)
+> [Y/N]: y
+...Success (생략)
+```
+* nid 명령어로 ORCLCDB 에서 linuxDB 로 DB 명을 변경합니다.
+
+<details>
+    <summary>오류 발생 시 해결 방법</summary>
+
+* ORA-01034 oracle avaliable 오류
+    - startup mount;
+    - select name from v$database;<br><br>
+
++ ORA-01109 데이터베이스 개방 오류
+	- alter database open;<br><br>
+
++ NID-00106 오라클 오류와 함께 DB 로그인 실패
+	- DB 로그인 실패 오류임. 비번 확인
+	- 오라클 startup mount; 가 되어 있지 않아 발생함.<br><br>
+
++ NID-00121 데이터 베이스 오픈 오류
+	- shutdown immediate;<br><br>
+
++ NID-00135 활성 스레드 오류
+	- alter database open;
+	- shutdown immediate;
+	- startup mount;<br><br>
+<hr>
+</details>
+<br><br>
+
+```css
+[oracle@localhost ~]$ sed -i 's/export ORACLE_SID=ORCLCDB/export ORACLE_SID=linuxDB/g' /home/oracle/.bash_profile
+[oracle@localhost ~]$ cat .bash_profile | grep "ORACLE_SID"
+export ORACLE_SID=linuxDB
+[oracle@localhost ~]$ source .bash_profile
+[oracle@localhost ~]$ cp -rf /sm-shell/Resource/Data/initlinuxDB.ora /opt/oracle/dbs
+```
+* sed 명령어로 .bash_profile ORACLE_SID 값을 ORCLCDB -> linuxDB 로 변경합니다.
+* cat 명령어로 변경이 잘되었는지 확인합니다.
+* 변경이 올바르게 되었다면, source 명령어로 변경된 설정을 적용합니다.
+* cp -rf 명령을 수행하여 /opt/oracle/dbs 경로에 initlinuxDB.ora 을 복사합니다.
+<br><br>
+
+```css
+[oracle@localhost ~]$ ora
+SQL> shutdown immediate;
+SQL> startup mount;
+SQL> select name from v$database;
+SQL> alter database open resetlogs;
+SQL> exit;
+```
+* ora 를 입력해 DB 접속 후 아래 SQL 6개 명령을 순차적으로 수행합니다.
+* select name from v$database; 명령 입력 시 LINUXDB 명이 출력되면 DB 명 변경 성공입니다.
 
 <br>
 

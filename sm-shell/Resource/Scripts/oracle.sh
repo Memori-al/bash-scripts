@@ -68,7 +68,7 @@ SQL
    
     nid target=sys DBNAME=linuxDB 2> $log_path/Oracle_DB_S_"$(date +"%m%d")".log
     if [[ ! $(cat $log_path/Oracle_DB_"$(date +"%m%d")".log | grep -o -e "NID-00106" -e "NID-00135" -e "ORA-01034" -e "NID-00121") ]]; then
-        sed -i 's/export ORACLE_SID=ORCLCDB/export ORACLE_SID=$DB/g' /home/oracle/.bash_profile
+        sed -i 's/export ORACLE_SID=ORCLCDB/export ORACLE_SID=linuxDB/g' /home/oracle/.bash_profile
         source /home/oracle/.bash_profile
         sqlplus -S / as sysdba << SQL 2> $log_path/Oracle_DB_S_"$(date +"%m%d")".log
         startup mount;
@@ -92,7 +92,7 @@ SQL
 
     cat > load_data.ctl << EOF
     LOAD DATA
-    INFILE '$data_path/score.txt'
+    INFILE '$data_path/data.txt'
     APPEND
     INTO TABLE $TABLE
     FIELDS TERMINATED BY '\t'
@@ -125,14 +125,14 @@ _OSort() {
     fi
 
     if [[ $TYPE != "0" ]]; then
-        head -n $HEAD $data_path/score.txt > /sm-shell/score_1.txt
-        tail -n $TAIL $data_path/score.txt > /sm-shell/score_2.txt
-        sort $SORT_1 /sm-shell/score_1.txt > /sm-shell/score_result.txt
-        sort $SORT_2 /sm-shell/score_2.txt >> /sm-shell/score_result.txt
-        rm -rf /sm-shell/score_1.txt
-        rm -rf /sm-shell/score_2.txt
+        head -n $HEAD $data_path/data.txt > /sm-shell/data_1.txt
+        tail -n $TAIL $data_path/data.txt > /sm-shell/data_2.txt
+        sort $SORT_1 /sm-shell/data_1.txt > /sm-shell/score_result.txt
+        sort $SORT_2 /sm-shell/data_2.txt >> /sm-shell/score_result.txt
+        rm -rf /sm-shell/data_1.txt
+        rm -rf /sm-shell/data_2.txt
     else
-        sort -k2,2 -k3,3n $data_path/score.txt > /sm-shell/score_result.txt
+        sort -k2,2 -k3,3n $data_path/data.txt > /sm-shell/score_result.txt
     fi
 }
 
