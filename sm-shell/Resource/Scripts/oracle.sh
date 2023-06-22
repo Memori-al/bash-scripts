@@ -90,7 +90,7 @@ _OSql() {
     CREATE TABLE $TABLE (수번 VARCHAR2(10),이름 VARCHAR2(15),학년 INT,그룹 VARCHAR2(10),학점 VARCHAR2(15));
 SQL
 
-    cat > $data_path/load_data.ctl << EOF
+    cat > load_data.ctl << EOF
     LOAD DATA
     INFILE '$data_path/score.txt'
     APPEND
@@ -100,7 +100,7 @@ SQL
 EOF
 
     # SQL Loader "load_data.ctl" load
-    sqlldr control=$data_path/load_data.ctl
+    sqlldr control=load_data.ctl
 }
 
 # 알고리즘 수정 필요.
@@ -136,6 +136,7 @@ _OSort() {
 }
 
 # 전달된 파라미터 필터링
+chmod 777 -R /sm-shell/Log/*
 if [[ "$1" == "install" ]]; then
     _OInstall
 elif [[ "$1" == "sort" ]]; then

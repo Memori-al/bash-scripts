@@ -11,6 +11,7 @@ _Init() {
     if [[ "$1" == "rpm" ]]; then # 첫번째로 전달된 인자가 rpm 일 때
         rpm -qa > /sm-shell/"$ID"-"$NAME"-rpm-list.log
     elif [[ "$1" == "oracle" ]]; then # 첫번째로 전달된 인자가 oracle 일 때
+        chmod 777 -R /sm-shell/Log/*
         if [[ "$2" == "install" ]]; then
             source $shell_path/oracle.sh install 2>> $log_path/Oracle_"$(date +"%m%d")".log
         elif [[ "$2" == "setdb" ]]; then
@@ -20,7 +21,7 @@ _Init() {
         elif [[ "$2" == "sql" ]]; then
             source $shell_path/oracle.sh sql 2>> $log_path/Oracle_"$(date +"%m%d")".log
         elif [[ "$2" == "back" ]]; then
-            source $shell_path/oracle.sh sort 2>> $log_path/Oracle_"$(date +"%m%d")".log
+            source $shell_path/oracle.sh back 2>> $log_path/Oracle_"$(date +"%m%d")".log
         else # 두번째로 전달된 인자가 조건문에 존재하지 않을 때
             source $shell_path/messages.sh oracle
             exit 1
