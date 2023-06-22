@@ -35,6 +35,10 @@ log_path="/sm-shell/Log"
 set_path="$data_path/settings.ini"
 net_path="/etc/sysconfig/network-scripts/ifcfg-enp4s0"
 
+if [[ ! -d "/sm-shell/Log" ]]; then
+    mkdir /sm-shell/Log
+fi
+
 if [[ -f "$set_path" ]]; then
     ID=$(cat $set_path | grep "ID =" | cut -f2 -d "=")
     NICK=$(cat $set_path | grep "NICK =" | cut -f2 -d "=")
