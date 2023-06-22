@@ -129,10 +129,11 @@ _OSort() {
         tail -n $TAIL $data_path/score.txt > /sm-shell/score_2.txt
         sort $SORT_1 /sm-shell/score_1.txt > /sm-shell/score_result.txt
         sort $SORT_2 /sm-shell/score_2.txt >> /sm-shell/score_result.txt
+        rm -rf /sm-shell/score_1.txt
+        rm -rf /sm-shell/score_2.txt
     else
-        sort -k2,2 -k3,3n /sm-shell/score.txt > /sm-shell/score_result.txt
+        sort -k2,2 -k3,3n $data_path/score.txt > /sm-shell/score_result.txt
     fi
-    rm -rf /sm-shell/score-*.txt
 }
 
 # 전달된 파라미터 필터링

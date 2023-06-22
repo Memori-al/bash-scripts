@@ -487,9 +487,11 @@ ___
 ___
 #### 6-2. oracle setdb
 ___
+
 ```css
-[oracle@localhost home]# /sm-shell/sm_final.sh oracle setdb
-[oracle@localhost home]# ora
+[root@localhost home]# su oracle
+[oracle@localhost home]$ /sm-shell/sm_final.sh oracle setdb
+[oracle@localhost home]$ ora
 SQL> select name from v$database;
 ```
 * `oracle setdb` 명령 사용 시 아래와 같은 동작이 수행됩니다.
@@ -507,7 +509,7 @@ ___
 #### 6-3. oracle back
 ___
 ```css
-[oracle@localhost home]# /sm-shell/sm_final.sh oracle back
+[oracle@localhost home]$ /sm-shell/sm_final.sh oracle back
 ```
 * `oracle setdb` 명령 수행 후 오류 발생 시 초기 상태로 복구해주는 명령어입니다.
 <br><br>
@@ -516,8 +518,8 @@ ___
 #### 6-4. oracle sql
 ___
 ```css
-[oracle@localhost home]# /sm-shell/sm_final.sh oracle sql
-[oracle@localhost home]# ora
+[oracle@localhost home]$ /sm-shell/sm_final.sh oracle sql
+[oracle@localhost home]$ ora
 SQL> select * from final_record;
 ```
 * `oracle sql` 명령 사용 시 아래와 같은 동작이 수행됩니다.
@@ -530,6 +532,7 @@ ___
 #### 6-5. oracle sort
 ___
 ```css
+[oracle@localhost home]$ su
 [root@localhost ~]# /sm-shell/sm_final.sh oracle sort
 ```
 * 미리 설정해둔 조건으로 `./Resource/Data/score.txt` 데이터 정렬 후 `./score_result.txt` 파일로 저장합니다.
