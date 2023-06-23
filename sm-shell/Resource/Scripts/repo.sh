@@ -19,5 +19,4 @@ yum repolist # 레포리스트 구성
 echo -e "$white$b_green"" Complete$cls  repo composition!"
 if [[ $(cat /etc/sysconfig/selinux | grep SELINUX=enforcing) ]]; then
     sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
-    reboot
 fi
