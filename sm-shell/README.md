@@ -473,7 +473,7 @@ drwxr--r-- 1 root  root  0  Jun 19  21:27 lost+found
 #### 6-1. oracle install
 ___
 ```css
-[oracle@localhost home]# /sm-shell/sm_final.sh oracle install
+[root@localhost home]# /sm-shell/sm_final.sh oracle install
 ```
 * `oracle install` 명령 사용 시 아래와 같은 동작이 수행됩니다
     - Oracle 21c Preinstall, EE 설치
@@ -587,7 +587,8 @@ SQL> select * from final_record;
 * `oracle sql` 명령 사용 시 아래와 같은 동작이 수행됩니다.
     - sql 실행하고 final_record 테이블 생성
     - sqlldr(sql loader) 를 사용하여 `./Resource/Data/score.txt` 데이터 삽입
-
+* 사용자 명 : sys as sysdba
+* 비밀번호  : wjsansrk
 <br>
 
 ___
