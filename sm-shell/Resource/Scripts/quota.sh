@@ -68,7 +68,7 @@ _QSettings() {
 
         quotacheck -augmn
         quotaon -avug
-        setquota -g linuxuser 10M 10M 20 20 /quotahome
+        setquota -g linuxuser 1M 1M 20 20 /quotahome
         setquota -u samuel 0 0 10 10 /quotahome
         setquota -u $NICK 0 0 0 0 /quotahome
         echo -e "$white$b_green"" Complete$cls  quota composition!"
