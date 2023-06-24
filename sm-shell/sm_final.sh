@@ -60,6 +60,8 @@ _Init() {
                 source $shell_path/mail.sh send local 2>> $log_path/Mail_Tranfer_"$(date +"%m%d")".log
             elif [[ "$3" == "global" ]]; then
                 source $shell_path/mail.sh send global 2>> $log_path/Mail_Tranfer_"$(date +"%m%d")".log
+            elif [[ "$3" == "nofile" ]]; then
+                source $shell_path/mail.sh send nofile 2>> $log_path/Mail_Tranfer_"$(date +"%m%d")".log
             else 
                 source $shell_path/messages.sh mail
                 exit 1
