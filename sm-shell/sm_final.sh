@@ -7,83 +7,86 @@
 # 스크립트 동작부
 _Init() {
     source /sm-shell/Resource/Scripts/settings.sh
-    # 전달된 파라미터 값 확인 후 매치
-    if [[ "$1" == "rpm" ]]; then # 첫번째로 전달된 인자가 rpm 일 때
-        rpm -e --nodeps firewalld-filesystem-0.6.3-11.el7.noarch
-        rpm -e --nodeps python-firewall-0.6.3-11.el7.noarch
-        rpm -e --nodeps firewalld-0.6.3-11.el7.noarch
-        rpm -e --nodeps firewall-config-0.6.3-11.el7.noarch
-        rpm -qa > /sm-shell/"$ID"-"$NAME"-rpm-list.log
-    elif [[ "$1" == "oracle" ]]; then # 첫번째로 전달된 인자가 oracle 일 때
-        chmod 777 -R /sm-shell/Log/*
-        if [[ "$2" == "install" ]]; then
-            source $shell_path/oracle.sh install 2>> $log_path/Oracle_"$(date +"%m%d")".log
-        elif [[ "$2" == "setdb" ]]; then
-            source $shell_path/oracle.sh setdb 2>> $log_path/Oracle_"$(date +"%m%d")".log
-        elif [[ "$2" == "sort" ]]; then
-            source $shell_path/oracle.sh sort 2>> $log_path/Oracle_"$(date +"%m%d")".log
-        elif [[ "$2" == "sql" ]]; then
-            source $shell_path/oracle.sh sql 2>> $log_path/Oracle_"$(date +"%m%d")".log
-        elif [[ "$2" == "back" ]]; then
-            source $shell_path/oracle.sh back 2>> $log_path/Oracle_"$(date +"%m%d")".log
-        else # 두번째로 전달된 인자가 조건문에 존재하지 않을 때
-            source $shell_path/messages.sh oracle
+    case "$1" in
+        "rpm")
+            rpm -qa > "/sm-shell/$ID-$NAME-rpm-list.log"
+            ;;
+        "oracle")
+            chmod 777 -R /sm-shell/Log/*
+            case "$2" in
+                "install" | "setdb" | "sort" | "sql" | "back")
+                    source "$shell_path/oracle.sh" "$2" >> "$log_path/Oracle_$(date +"%m%d").log" 2>&1
+                    ;;
+                *)
+                    source "$shell_path/messages.sh" oracle
+                    exit 1
+                    ;;
+            esac
+            ;;
+        "repo")
+            source "$shell_path/repo.sh"
+            ;;
+        "apm")
+            case "$2" in
+                "install" | "split" | "merge" | "check")
+                    source "$shell_path/apm.sh" "$2" >> "$log_path/APM_$(date +"%m%d").log" 2>&1
+                    ;;
+                *)
+                    source "$shell_path/messages.sh" apm
+                    exit 1
+                    ;;
+            esac
+            ;;
+        "quota")
+            case "$2" in
+                "install")
+                    source "$shell_path/quota.sh" install >> "$log_path/Quota_$(date +"%m%d").log" 2>&1
+                    ;;
+                "set")
+                    source "$shell_path/quota.sh" set "$3" >> "$log_path/Quota_$(date +"%m%d").log" 2>&1
+                    ;;
+                *)
+                    source "$shell_path/messages.sh" quota
+                    exit 1
+                    ;;
+            esac
+            ;;
+        "mail")
+            case "$2" in
+                "send")
+                    case "$3" in
+                        "local" | "global" | "nofile")
+                            source "$shell_path/mail.sh" send "$3" >> "$log_path/Mail_Tranfer_$(date +"%m%d").log" 2>&1
+                            ;;
+                        *)
+                            source "$shell_path/messages.sh" mail
+                            exit 1
+                            ;;
+                    esac
+                    ;;
+                "install")
+                    source "$shell_path/mail.sh" install >> "$log_path/Mail_Tranfer_$(date +"%m%d").log" 2>&1
+                    ;;
+                *)
+                    source "$shell_path/messages.sh" mail
+                    exit 1
+                    ;;
+            esac
+            ;;
+        "help")
+            source "$shell_path/messages.sh" help
+            ;;
+        *)
+            source "$shell_path/messages.sh" "$1"
             exit 1
-        fi
-    elif [[ "$1" == "repo" ]]; then
-        source $shell_path/repo.sh
-    elif [[ "$1" == "apm" ]]; then # 첫번째로 전달된 인자가 apm 일 때
-        if [[ "$2" == "install" ]]; then
-            source $shell_path/apm.sh install 2>> $log_path/APM_"$(date +"%m%d")".log
-        elif [[ "$2" == "split" ]]; then
-            source $shell_path/apm.sh split 2>> $log_path/APM_"$(date +"%m%d")".log
-        elif [[ "$2" == "merge" ]]; then
-            source $shell_path/apm.sh merge 2>> $log_path/APM_"$(date +"%m%d")".log
-        elif [[ "$2" == "check" ]]; then
-            source $shell_path/apm.sh check 2>> $log_path/APM_"$(date +"%m%d")".log
-        else # 두번째로 전달된 인자가 조건문에 존재하지 않을 때
-            source $shell_path/messages.sh apm
-            exit 1
-        fi
-    elif [[ "$1" == "quota" ]]; then # 첫번째로 전달된 인자가 quota 일 때
-        if [[ $2 == "install" ]]; then
-            source $shell_path/quota.sh install 2>> $log_path/Quota_"$(date +"%m%d")".log
-        elif [[ $2 == "set" ]]; then
-            source $shell_path/quota.sh set $3 2>> $log_path/Quota_"$(date +"%m%d")".log
-        else
-            source $shell_path/messages.sh quota
-            exit 1
-        fi
-    elif [[ "$1" == "mail" ]]; then # 첫번째로 전달된 인자가 mail 일 때
-        if [[ "$2" == "send" ]]; then
-            if [[ "$3" == "local" ]]; then
-                source $shell_path/mail.sh send local 2>> $log_path/Mail_Tranfer_"$(date +"%m%d")".log
-            elif [[ "$3" == "global" ]]; then
-                source $shell_path/mail.sh send global 2>> $log_path/Mail_Tranfer_"$(date +"%m%d")".log
-            elif [[ "$3" == "nofile" ]]; then
-                source $shell_path/mail.sh send nofile 2>> $log_path/Mail_Tranfer_"$(date +"%m%d")".log
-            else 
-                source $shell_path/messages.sh mail
-                exit 1
-            fi
-        elif [[ "$2" == "install" ]]; then
-            source $shell_path/mail.sh install 2>> $log_path/Mail_Tranfer_"$(date +"%m%d")".log
-        else
-            source $shell_path/messages.sh mail
-            exit 1
-        fi
-    elif [[ "$1" == "help" ]]; then
-        source $shell_path/messages.sh help
-    else # 첫번째로 전달된 인자가 조건문에 존재하지 않을 때
-        source $shell_path/messages.sh $1
-        exit 1
-    fi
+            ;;
+    esac
 } 2>> /sm-shell/Log/Init_"$(date +"%m%d")".log
 
 # 예외 처리 핸들러
 _Handler() {
     echo "[$2] $1 $3 Error" >> $log_path/Error_"$(date +"%m%d")".log
-    echo -e "$white""$b_red[$2] $1 $3 Error$cls"
+    echo -e "$white$b_red[$2] $1 $3 Error$cls"
 } 2>> $log_path/Error_"$(date +"%m%d")".log
 
 # 시작 함수
