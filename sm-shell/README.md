@@ -12,7 +12,7 @@
  * 스크립트 사용 시 설치 시간 포함 30~40 분 내에 시험을 끝마칠 수 있습니다.
 
 > ℹ️ 본 가이드는 다크모드에 최적화 되어있습니다.
-&nbps;&nbps;다크모드 설정을 권장드립니다.
+&nbps;&npbs; 다크모드 설정을 권장드립니다.
 
  [![Up to Date](https://github.com/ikatyang/emoji-cheat-sheet/workflows/Up%20to%20Date/badge.svg)](https://github.com/Memori-al/bash-scripts)
 <br> <hr>
