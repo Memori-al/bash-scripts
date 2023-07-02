@@ -44,14 +44,14 @@
 
 # 📜 Contents
 ## 📖 Theory
-* [아키텍처](#architecture)
+* [아키텍처](#-architecture)
     * [도식도](#-architecture-diagram)
 
 ## ⚙️ Command Table
-* [명령어 표](#Command-Table)
+* [명령어 표](#%EF%B8%8F-command-table-1)
 
 ## 🌱 Configuration
-* [settings.sh 초기 설정 방법](#Configuration)
+* [settings.sh 초기 설정 방법](#%EF%B8%8F-settingsini-설정)
     * [사용자 설정](#1-사용자-설정)
     * [APM 설정](#2-APM-설정)
     * [메일 설정](#3-메일-설정)
@@ -61,7 +61,7 @@
     * [(*개발자용) 스크립트 모듈 설정](#7--개발자용--스크립트-모듈-설정)
 
 ## 📃 Guide
-* [쉘 사용 가이드](#guide)
+* [쉘 사용 가이드](#-guide-1)
     * [repo 명령어]()
     * [rpm 명령어]()
     * [apm 명령어]()
@@ -84,13 +84,13 @@
         * [sort 명령어]()
 
 ## 🤗 Standardization
-* [표준화](#Features-&-Commands)
-    * [Function Renaming](#1-Function-Renaming-main)
-    * [Exception & Error Handling](#2-Exception--Error-Handling-main)
-    * [HA Logging](#3-High-Available-Logging-main)
+* [표준화](#-standardization-1)
+    * [Function Renaming](#1-function-renaming-main)
+    * [Exception & Error Handling](#2-exception--error-handling-main)
+    * [HA Logging](#3-high-available-main)
 
 ## 🔖 Reference
-* [Reference Link](#reference)
+* [Reference Link](#-reference-1)
    * [Bash Style 표준화 지침서](#1.-reference-link)
 
 <hr>
