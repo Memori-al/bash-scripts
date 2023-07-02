@@ -1,6 +1,6 @@
 <hr>
 
-# 👁️‍🗨️ <span style="color: #50bcdf">Overview</span>
+# 👁️‍🗨️ Overview
 ### 🎯 제작 목적
  * 안녕하세요! 😃 전주대학교 **19**학번 **이강일**입니다.<br>
  리눅스를 어려워하는 🌿동기 및 후배분들을 위해 본 스크립트를 제작하게 되었습니다.
@@ -42,7 +42,7 @@
     * Indent    :   4
 <hr>
 
-# 📜 <span style="color: #ffd700">Contents</span>
+# 📜 Contents
 ## 📖 Theory
 * [아키텍처](#architecture)
     * [도식도](#-architecture-diagram)
@@ -95,7 +95,7 @@
 
 <hr>
 
-# 🧱 <span style="color: #50bcdf">Architecture</span>
+# 🧱 Architecture
 <details>
 <summary> View </summary>
 
