@@ -62,26 +62,26 @@
 
 ## 📃 Guide
 * [쉘 사용 가이드](#-guide-1)
-    * [repo 명령어]()
-    * [rpm 명령어]()
-    * [apm 명령어]()
-        * [split 명령어]()
-        * [merge 명령어]()
-        * [install 명령어]()
-        * [check 명령어]()
-    * [quota 명령어]()
-        * [초기 설정]()
-        * [install 명령어]()
-        * [set 명령어]()
-    * [sendmail 명령어]()
-        * [install 명령어]()
-        * [send 명령어]()
-    * [oracle 명령어]()
-        * [install 명령어]()
-        * [setdb 명령어]()
-        * [back 명령어]()
-        * [sql 명령어]()
-        * [sort 명령어]()
+    * [repo 명령어](#1-repo-명령어)
+    * [rpm 명령어](#2-rpm-명령어)
+    * [apm 명령어](#3-apm-명령어)
+        * split 명령어
+        * merge 명령어
+        * install 명령어
+        * check 명령어
+    * [quota 명령어](#4-quota-명령어)
+        * 초기 설정
+        * install 명령어
+        * set 명령어
+    * [sendmail 명령어](#5-sendmail-명령어)
+        * install 명령어
+        * send 명령어
+    * [oracle 명령어](#6-oracle-명령어)
+        * install 명령어
+        * setdb 명령어
+        * back 명령어
+        * sql 명령어
+        * sort 명령어
 
 ## 🤗 Standardization
 * [표준화](#-standardization-1)
@@ -91,7 +91,7 @@
 
 ## 🔖 Reference
 * [Reference Link](#-reference-1)
-   * [Bash Style 표준화 지침서](#1.-reference-link)
+   * Bash Style 표준화 지침서
 
 <hr>
 
