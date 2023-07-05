@@ -32,14 +32,14 @@
 ### ©️ 전자 서명
     * Author    :   이강일
     * Contacts  :   lki_familiar@naver.com
-    * Commit    :   23. 06. 19
-    * Version   :   2.*
+    * Commit    :   23. 06. 23
+    * Version   :   2
     * License   :   GPL
 
     * OS        :   Centos 7.*
     * Language  :   Bash Shell
     * Shebang   :   #!/bin/bash
-    * Scripts   :   7
+    * Scripts   :   8
     * Indent    :   4
 <hr>
 
