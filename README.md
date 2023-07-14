@@ -2,7 +2,8 @@
 
 ### 🔧 Server Manager Script
 >* [agm_v2_kernel.sh](https://github.com/Memori-al/bash-scripts/tree/main/sm)
-<br> - CLI 용 사용자 및 그룹 관리 스크립트
+<br> - CLI 용 사용자 및 그룹 관리 스크립트<br>
+
 >* [sm_final.sh](https://github.com/Memori-al/bash-scripts/tree/main/sm-shell)
 <br> - 서버관리 기말시험 자동화 쉘 스크립트
 
