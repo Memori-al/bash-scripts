@@ -1,6 +1,6 @@
 #!/bin/bash
 # Made by luikie #
-# Commit Date : 2023. 03. 26. Sat. #
+# Commit Date : 2023. 10. 03. Tue. #
 
 Main() {
 	# sm-*.txt 파일 확인
