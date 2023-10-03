@@ -1,18 +1,18 @@
-riveria  hsa
-dogger  hsa
-winner  hsb
-thyer  hsb
-civeria  hsa
-piber  hsb
-begger  hsb
-luikie  hsa
-pibber  hsa
-thember  hsb
-tajer  hsa
-shiniper  hsa
-whitemer  hsa
-lipelra  hsb
-jamber  hsb
-yetter  hsa
-dweler  hsb
-tientail  hsb
+김호준  riveria  hsa
+이동수  dogger  hsa
+최부건  winner  hsb
+유태현  thyer  hsb
+유종환  civeria  hsa
+박용현  piber  hsb
+백민규  begger  hsb
+이강일  luikie  hsa
+박지혁  pibber  hsa
+송재형  thember  hsb
+정한나  tajer  hsa
+한재성  shiniper  hsa
+강은종  whitemer  hsa
+이환희  lipelra  hsb
+유기석  jamber  hsb
+연건모  yetter  hsa
+양가은  dweler  hsb
+응웬반  tientail  hsb
