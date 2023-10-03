@@ -60,7 +60,7 @@ Utg() {
     fi
 	
 	# Group Settings
-	groups=("kt:6000" "skt:6001" "lgt:6002") # 그룹:그룹아이디 배열
+	groups=("hsa:6000" "hsb:6001") # 그룹:그룹아이디 배열
 	for group in "${groups[@]}" # group 변수에 groups 배열 입력
 	do
 		gname=$(echo $group | cut -d: -f1) # group 배열의 1번 필드 분할 후 저장
@@ -72,18 +72,20 @@ Utg() {
 	done
 
 	# Utg
-	while read -r user group # sm-user.txt 데이터를 읽어옴
+	while read -r name user group # sm-user.txt 데이터를 읽어옴
 	do
 		if getent group "$group" | grep &>/dev/null "\b$user\b"; then # 그룹에 사용자가 존재할 때
 			echo -e "$title ${red}User $user already exists in group $group.${cls}"
 		else
 			if id -u "$user" >/dev/null 2>&1; then # 사용자가 시스템 상에 존재할 때
 				usermod -a -G "$group" "$user" # 그룹에 사용자 추가
+    				usermod -c "$name" "$user"
 				chgrp "$group" "/home/$user" # 그룹에 사용자 추가
 			else
 				useradd -m -d /home/$user -s /bin/bash $user # 사용자와 사용자의 home 디렉토리 생성
 				echo "$user:wjsansrk"|chpasswd # 사용자의 비밀번호 변경
 				usermod -a -G "$group" "$user"  # 그룹에 사용자 추가
+    				usermod -c "$name" "$user"
 				chgrp "$group" "/home/$user" # 그룹에 사용자 추가
 				echo "$title Create $user and move to $group group" # 생성 후 결과 보고
 			fi
