@@ -4,8 +4,8 @@
 
 Main() {
 	# sm-*.txt 파일 확인
-	if [[ ! -f "./sm-user.txt" ]]; then
-		wget "https://raw.githubusercontent.com/Memori-al/bash-scripts/main/sm-user.txt" # git 서버에서 sm-user.txt 파일 다운로드
+	if [[ ! -f "./hs-user.txt" ]]; then
+		wget "https://raw.githubusercontent.com/Memori-al/bash-scripts/main/sm/hs-user.txt" # git 서버에서 hs-user.txt 파일 다운로드
 	fi
 	if [[ ! -f "./sm-deluser.txt" ]]; then
 		wget -O "./sm-deluser.txt" "https://raw.githubusercontent.com/Memori-al/bash-scripts/main/sm-user.txt" # git 서버에서 sm-user.txt 파일 다운로드 후 sm-deluser.txt 로 저장
