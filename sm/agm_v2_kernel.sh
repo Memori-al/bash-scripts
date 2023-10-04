@@ -55,7 +55,7 @@ Menu() {
 
 # Add non-existent users to the group
 Utg() {
-	if [ ! -s "./sm-user.txt" ]; then # uid_arr 데이터가 비었을 때 예외 처리
+	if [ ! -s "./hs-user.txt" ]; then # uid_arr 데이터가 비었을 때 예외 처리
         Error "$title Unable to read user list. please check ./sm-user.txt"
     fi
 	
@@ -91,7 +91,7 @@ Utg() {
 			fi
 			count=$(($count+1))
 		fi
-	done < sm-user.txt
+	done < hs-user.txt
 	echo "$title $count Created!"
 	read -t 3 -s
     Menu
