@@ -1,11 +1,11 @@
 #!/bin/bash
 # Made by luikie #
-# Commit Date : 2023. 03. 26. Sat. #
+# Commit Date : 2023. 10. 03. Tue. #
 
 Main() {
 	# sm-*.txt 파일 확인
-	if [[ ! -f "./sm-user.txt" ]]; then
-		wget "https://raw.githubusercontent.com/Memori-al/bash-scripts/main/sm-user.txt" # git 서버에서 sm-user.txt 파일 다운로드
+	if [[ ! -f "./hs-user.txt" ]]; then
+		wget "https://raw.githubusercontent.com/Memori-al/bash-scripts/main/sm/hs-user.txt" # git 서버에서 hs-user.txt 파일 다운로드
 	fi
 	if [[ ! -f "./sm-deluser.txt" ]]; then
 		wget -O "./sm-deluser.txt" "https://raw.githubusercontent.com/Memori-al/bash-scripts/main/sm-user.txt" # git 서버에서 sm-user.txt 파일 다운로드 후 sm-deluser.txt 로 저장
@@ -55,12 +55,12 @@ Menu() {
 
 # Add non-existent users to the group
 Utg() {
-	if [ ! -s "./sm-user.txt" ]; then # uid_arr 데이터가 비었을 때 예외 처리
+	if [ ! -s "./hs-user.txt" ]; then # uid_arr 데이터가 비었을 때 예외 처리
         Error "$title Unable to read user list. please check ./sm-user.txt"
     fi
 	
 	# Group Settings
-	groups=("kt:6000" "skt:6001" "lgt:6002") # 그룹:그룹아이디 배열
+	groups=("hsa:6000" "hsb:6001") # 그룹:그룹아이디 배열
 	for group in "${groups[@]}" # group 변수에 groups 배열 입력
 	do
 		gname=$(echo $group | cut -d: -f1) # group 배열의 1번 필드 분할 후 저장
@@ -72,24 +72,26 @@ Utg() {
 	done
 
 	# Utg
-	while read -r user group # sm-user.txt 데이터를 읽어옴
+	while read -r name user group # sm-user.txt 데이터를 읽어옴
 	do
 		if getent group "$group" | grep &>/dev/null "\b$user\b"; then # 그룹에 사용자가 존재할 때
 			echo -e "$title ${red}User $user already exists in group $group.${cls}"
 		else
 			if id -u "$user" >/dev/null 2>&1; then # 사용자가 시스템 상에 존재할 때
 				usermod -a -G "$group" "$user" # 그룹에 사용자 추가
+    				usermod -c "$name" "$user"
 				chgrp "$group" "/home/$user" # 그룹에 사용자 추가
 			else
 				useradd -m -d /home/$user -s /bin/bash $user # 사용자와 사용자의 home 디렉토리 생성
 				echo "$user:wjsansrk"|chpasswd # 사용자의 비밀번호 변경
 				usermod -a -G "$group" "$user"  # 그룹에 사용자 추가
+    				usermod -c "$name" "$user"
 				chgrp "$group" "/home/$user" # 그룹에 사용자 추가
 				echo "$title Create $user and move to $group group" # 생성 후 결과 보고
 			fi
 			count=$(($count+1))
 		fi
-	done < sm-user.txt
+	done < hs-user.txt
 	echo "$title $count Created!"
 	read -t 3 -s
     Menu
